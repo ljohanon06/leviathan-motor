@@ -1,3 +1,13 @@
+/*
+ * File        : voltage_normalizer.sv
+ * Author      : Levi Johanon
+ * Description : Calculates how long the pwm should be high based on line voltage
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module voltage_normalizer (
 	input [17:0] v_in, //Signed x.xxx...
 	output logic [9:0] pwm_high);

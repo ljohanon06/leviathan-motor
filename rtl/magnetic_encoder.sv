@@ -1,20 +1,12 @@
-//SSI Controller for MT6701
 /*
-Timing Details:
-Clock period: 64ns
-Total time: 1536ns
-Enable should be high for 100ns at least
-
-1R-CSN falls
-2F-CLK falls
-3F-D13...
-
-on crc0, no falling edge clk
-
-Data 13:0
-Status 3:0
-CRC 5:0 x^6+x+1
-*/
+ * File        : magnetic_encoder.sv
+ * Author      : Levi Johanon
+ * Description : Soft IP for MT6701, SSI communication protocol, crc checksum
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
 	
 module magnetic_encoder(
 	input mag_clk,
@@ -91,6 +83,23 @@ module magnetic_encoder(
 		.met_crc(met_crc));
 	
 endmodule
+
+/*
+Timing Details:
+Clock period: 64ns
+Total time: 1536ns
+Enable should be high for 100ns at least
+
+1R-CSN falls
+2F-CLK falls
+3F-D13...
+
+on crc0, no falling edge clk
+
+Data 13:0
+Status 3:0
+CRC 5:0 x^6+x+1
+*/
 
 
 	

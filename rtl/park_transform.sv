@@ -1,3 +1,13 @@
+/*
+ * File        : park_transform.sv
+ * Author      : Levi Johanon
+ * Description : Transforms space current vector to direct and quadrature current
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module park_transform (
 	input clk,
 	input reset,

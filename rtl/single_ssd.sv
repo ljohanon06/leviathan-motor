@@ -1,3 +1,13 @@
+/*
+ * File        : single_ssd.sv
+ * Author      : Levi Johanon
+ * Description : Auxilliary seven segment display encoder
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module single_ssd (
 	input [3:0] in,
 	output logic [0:6] ssd);

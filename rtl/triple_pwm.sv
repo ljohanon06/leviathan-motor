@@ -1,3 +1,14 @@
+/*
+ * File        : triple_pwm.sv
+ * Author      : Levi Johanon
+ * Description : Calculated pwm information from line voltages, uses single_pwm
+ *		 Tells ADC when to take measurement
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module triple_pwm (
 	input pwm_clk,  
 	input reset,
