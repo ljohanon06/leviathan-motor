@@ -1,10 +1,12 @@
 /*
-There is two phases for the SAR adc:
-	-Capacitor Charge Phase: Internal capacitor matches external voltage 600ns
-	-Data Conversion Phase: ADC sticks data into shift register 1400ns
-	
-External Controller is in charge of guarenteeing 600ns Cap charge phase
-*/
+ * File        : adc.sv
+ * Author      : Levi Johanon
+ * Description : Soft IP to interact with MCP33151D ADC.
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
 
 module adc (
 	input clk, //100MHz
@@ -66,6 +68,14 @@ module adc (
 	end
 	
 endmodule
+
+/*
+There is two phases for the SAR adc:
+	-Capacitor Charge Phase: Internal capacitor matches external voltage 600ns
+	-Data Conversion Phase: ADC sticks data into shift register 1400ns
+	
+External Controller is in charge of guarenteeing 600ns Cap charge phase
+*/
 		
 	
 	

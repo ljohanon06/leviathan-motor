@@ -1,3 +1,13 @@
+/*
+ * File        : current_adder.sv
+ * Author      : Levi Johanon
+ * Description : Takes two ADC inputs and outputs the 3 line currents.
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module current_adder (
 	input [13:0] adc_i1,
 	input [13:0] adc_i2,

@@ -1,3 +1,14 @@
+/*
+ * File        : current_normalizer.sv
+ * Author      : Levi Johanon
+ * Description : Submodule of current adder, adds sign bit and extra bit
+ *		 of room to prevent later overflow
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module current_normalizer (
 	input [13:0] adc_raw,
 	output [14:0] adc_norm);
