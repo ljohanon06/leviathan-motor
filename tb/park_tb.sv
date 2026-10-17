@@ -1,3 +1,13 @@
+/*
+ * File        : park_tb.sv
+ * Author      : Levi Johanon
+ * Description : Basic testbench for park.sv
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 `timescale 1ns / 1ps
 
 module park_tb();

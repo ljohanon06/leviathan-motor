@@ -1,3 +1,13 @@
+/*
+ * File        : cordic_tb.sv
+ * Author      : Levi Johanon
+ * Description : Basic testbench for cordic_full.sv
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 `timescale 1ns / 1ps
 
 module cordic_tb;

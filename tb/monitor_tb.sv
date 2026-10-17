@@ -1,3 +1,13 @@
+/*
+ * File        : monitor_tb.sv
+ * Author      : Levi Johanon
+ * Description : Testbench for the monitor.sv ft232h file
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 `timescale 1ns / 1ps
 
 module monitor_tb();

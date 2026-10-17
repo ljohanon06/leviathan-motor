@@ -1,3 +1,13 @@
+/*
+ * File        : forward_transform_tb.sv
+ * Author      : Levi Johanon
+ * Description : Basic transform for forward_transform.sv, works with Matlab_tests.m
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 `timescale 1ns / 1ps
 
 module forward_transform_tb ();

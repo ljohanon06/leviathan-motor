@@ -1,3 +1,13 @@
+/*
+ * File        : clarke_tb.sv
+ * Author      : Levi Johanon
+ * Description : Basic testbench for clarke_transform.sv
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 `timescale 1ns / 1ps
 
 module clarke_tb ();
@@ -79,9 +89,7 @@ module clarke_tb ();
 		#20 //2 Clock cycle
 		$display("Theta = 300, i1 = %d, i2 = %d, i3 = %d, ia = %d, ib = %d",
 				$signed(i1),$signed(i2),$signed(i3),$signed(ia),$signed(ib));
-		
-		
-		
+	
 	end
 	
 	
