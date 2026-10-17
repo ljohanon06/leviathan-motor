@@ -20,8 +20,8 @@ module mag_enc_test (
 	logic clk_15;
 	
 	pll pll_inst (
-		.areset (~reset),
-		.inclk0 (clk_50),
+		.reset (~reset),
+		.clk_in (clk_50),
 		.c2 (clk_15));
 	
 	logic me_done;

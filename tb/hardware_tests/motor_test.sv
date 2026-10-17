@@ -35,16 +35,14 @@ module motor_test(
 	logic clk_100;
 	logic clk_222; //Gate Driver clock
 	logic clk_15; //Magnetic encoder
-	logic pll_bad; //Active Low
 	
 	//PLL
 	pll pll_inst (
-		.areset (~reset),
-		.inclk0 (clk_50),
+		.reset (~reset),
+		.clk_in (clk_50),
 		.c0 (clk_100),
 		.c1 (clk_222),
 		.c2 (clk_15),
-		.locked (pll_bad) 
 	);
 	
 	//State Variables
