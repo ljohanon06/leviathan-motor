@@ -1,3 +1,13 @@
+/*
+ * File        : inverse_park.sv
+ * Author      : Levi Johanon
+ * Description : Transforms direct and quadrature voltage to space vector voltage
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module inverse_park(
 	input clk,
 	input reset,

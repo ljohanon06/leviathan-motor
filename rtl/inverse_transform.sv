@@ -1,3 +1,13 @@
+/*
+ * File        : inverse_transform.sv
+ * Author      : Levi Johanon
+ * Description : Transforms PI output voltage to line voltages, need external cordic angle
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module inverse_transform (
 	input clk,
 	input reset,

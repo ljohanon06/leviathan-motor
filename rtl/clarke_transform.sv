@@ -1,3 +1,13 @@
+/*
+ * File        : clarke_transform.sv
+ * Author      : Levi Johanon
+ * Description : Transforms line currents into space vector current
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module clarke_transform (
 	input clk,
 	input reset,

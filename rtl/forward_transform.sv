@@ -1,3 +1,13 @@
+/*
+ * File        : forward_transform.sv
+ * Author      : Levi Johanon
+ * Description : Converts adc outputs to direct and quadrature currents, needs external angle
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module forward_transform(
 	input clk,
 	input reset,

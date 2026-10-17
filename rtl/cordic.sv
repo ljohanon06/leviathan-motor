@@ -1,4 +1,12 @@
-
+/*
+ * File        : cordic.sv
+ * Author      : Levi Johanon
+ * Description : Main cordic logic, wrapped with cordic_full
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
 
 module cordic (
 	input clk,
@@ -15,8 +23,8 @@ module cordic (
 		s6, s7, s8, s9, s10, s11, idle} cordic_state_t;
 	
 	localparam [0:11] [11:0] tan = {12'd2048, 12'd1209, 12'd639, 12'd324,
-											  12'd163,  12'd81,   12'd41,  12'd20,
-											  12'd10,   12'd5,    12'd3,   12'd1};
+		12'd163,  12'd81,   12'd41,  12'd20,
+		12'd10,   12'd5,    12'd3,   12'd1};
 	
 	cordic_state_t state;
 	

@@ -1,3 +1,13 @@
+/*
+ * File        : fifo_ft232h.sv
+ * Author      : Levi Johanon
+ * Description : Implements four stage handshake to communicate with ft232h, inside monitor.sv
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module fifo_ft232h (
 	input reset, //Internal Connections
 	input clk,

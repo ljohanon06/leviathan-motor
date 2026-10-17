@@ -1,5 +1,14 @@
-//N is bytes sent, max 16
-module monitor #(parameter N = 2,
+/*
+ * File        : monitor.sv
+ * Author      : Levi Johanon
+ * Description : Sends N bytes to ft232h with sync signal and crc checksum.
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
+module monitor #(parameter N = 2, //Bytes sent, max 16
 	parameter B = (N < 2) ? 2 : ((N>16) ? 16 : N)) (
 	input clk,
 	input reset,

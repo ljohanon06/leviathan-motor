@@ -1,14 +1,24 @@
+/*
+ * File        : cordic_full.sv
+ * Author      : Levi Johanon
+ * Description : Cordic algorithm with normalized magnetic encoder input and sign-magnitude output
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module cordic_full (
 	input clk,
 	input reset,
-	input valid,
+	input valid, //Set high when input angle is valid
 	input [13:0] angle_in,
 	output logic [15:0] cos_mag,
 	output cos_sign,
 	output logic [15:0] sin_mag,
 	output sin_sign,
-	output done,
-	output ready);
+	output done, //Set high after 12 clock cycles when angle is ready
+	output ready); //Set high when not calculating
 	
 	logic [11:0] norm_angle;
 	logic [1:0] quadrant;

@@ -1,7 +1,12 @@
 /*
-Handles the clock domain crossing between the ft232h and the fpga
-Uses a 4 step handshake
-*/
+ * File        : fifo_ft232h_cdc.sv
+ * Author      : Levi Johanon
+ * Description : Handles the clock domain crossing between FPGA and FT232H, inside fifo_ft232h.sv
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
 
 module fifo_ft232h_cdc(
 	input reset,

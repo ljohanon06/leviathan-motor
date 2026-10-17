@@ -1,3 +1,13 @@
+/*
+ * File        : inverse_clarke.sv
+ * Author      : Levi Johanon
+ * Description : Transforms space voltage vector to line voltages
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module inverse_clarke(
 	input clk,
 	input reset,

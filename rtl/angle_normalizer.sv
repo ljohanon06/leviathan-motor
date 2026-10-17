@@ -1,3 +1,13 @@
+/*
+ * File        : angle_normalizer.sv
+ * Author      : Levi Johanon
+ * Description : Normalizes magnetic encoder output to get quadrant and angle from x-axis
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module angle_normalizer (
 	input [13:0] angle_in,
 	output logic [11:0] norm_angle,

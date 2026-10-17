@@ -1,3 +1,13 @@
+/*
+ * File        : crc.sv
+ * Author      : Levi Johanon
+ * Description : Cyclic redundency checksum algorithm, used for magnetic encoder and fifo output
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module crc #(
 	BIT_WIDTH = 14,
 	CRC_WIDTH = 7,
