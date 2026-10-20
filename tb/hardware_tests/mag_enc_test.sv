@@ -37,7 +37,7 @@ module mag_enc_test (
 		else clk_ladder <= clk_ladder + 28'b1;
 	end
 	
-	always_ff @(posedge clk_ladder[23]) angle_reg2 <= angle_reg;
+	always_ff @(posedge clk_ladder[10]) angle_reg2 <= angle_reg;
 	
 	logic [23:0] raw_data;
 	assign mg = raw_data[9:6];
