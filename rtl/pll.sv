@@ -11,14 +11,19 @@
 module pll (
 	input reset,
 	input clk_in,
-	output c0,
-	output c1,
-	output c2);
+	output logic c0,
+	output logic c1,
+	output logic c2);
+	
+	logic [4:0] clk_out;
+	assign c0 = clk_out[0];
+	assign c1 = clk_out[1];
+	assign c2 = clk_out[2];
 	
 	altpll altpll_component (
-		.areset(areset),
+		.areset(reset),
 		.inclk({1'b0,clk_in}),
-		.clk({c2,c1,c0}));
+		.clk(clk_out));
 	defparam
 		altpll_component.clk0_divide_by = 99, 
 		altpll_component.clk0_multiply_by = 200, 
@@ -35,6 +40,8 @@ module pll (
 		altpll_component.port_clk0 = "PORT_USED",
 		altpll_component.port_clk1 = "PORT_USED",
 		altpll_component.port_clk2 = "PORT_USED",
-		altpll_component.width_clock = 3;
+		altpll_component.port_clk3 = "PORT_UNUSED",
+		altpll_component.port_clk4 = "PORT_UNUSED",
+		altpll_component.width_clock = 5;
 endmodule	
 	

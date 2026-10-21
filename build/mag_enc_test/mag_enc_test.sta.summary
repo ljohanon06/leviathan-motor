@@ -1,0 +1,101 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -1.592
+TNS   : -12.629
+
+Type  : Slow 1200mV 85C Model Setup 'ladder_bit_0'
+Slack : 17.814
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'ladder_bit_0'
+Slack : 0.347
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.577
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk_50'
+Slack : 9.820
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ladder_bit_0'
+Slack : 19.715
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 32.141
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ladder_bit_10'
+Slack : 120479.765
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -1.108
+TNS   : -8.125
+
+Type  : Slow 1200mV 0C Model Setup 'ladder_bit_0'
+Slack : 18.050
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.232
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'ladder_bit_0'
+Slack : 0.310
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk_50'
+Slack : 9.830
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ladder_bit_0'
+Slack : 19.733
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 32.118
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ladder_bit_10'
+Slack : 120479.758
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -0.132
+TNS   : -0.474
+
+Type  : Fast 1200mV 0C Model Setup 'ladder_bit_0'
+Slack : 19.006
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ladder_bit_0'
+Slack : 0.150
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.242
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk_50'
+Slack : 9.530
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ladder_bit_0'
+Slack : 19.712
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'pll_inst|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 32.203
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ladder_bit_10'
+Slack : 120479.736
+TNS   : 0.000
+
+------------------------------------------------------------

@@ -38,43 +38,47 @@ set_location_assignment	PIN_B10	-to	{mg[3]	}
 set_location_assignment	PIN_A8	-to	{mg[0]	}
 
 #Set IO Standards
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{csn	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{d_in	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{mag_clk_out}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{reset	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[0]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[1]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[2]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[3]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[4]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[5]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd1[6]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[0]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[1]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[2]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[3]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[4]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[5]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd2[6]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[0]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[1]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[2]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[3]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[4]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[5]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd3[6]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[0]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[1]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[2]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[3]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[4]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[5]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{ssd4[6]}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{clk_50	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{mg[1]	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{mg[2]	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{mg[3]	}
-set_instance_assignment	-name	IO_STANDARD	“3.3-V LVTTL”	-to	{mg[0]	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{csn	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{d_in	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{mag_clk_out}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{reset	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[0]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[1]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[2]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[3]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[4]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[5]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd1[6]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[0]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[1]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[2]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[3]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[4]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[5]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd2[6]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[0]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[1]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[2]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[3]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[4]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[5]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd3[6]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[0]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[1]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[2]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[3]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[4]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[5]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{ssd4[6]}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{clk_50	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{mg[1]	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{mg[2]	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{mg[3]	}
+set_instance_assignment	-name	IO_STANDARD	"3.3-V LVTTL"	-to	{mg[0]	}
+
+set_instance_assignment -name PCI_IO "ON" -to reset
+set_instance_assignment -name PCI_IO "ON" -to clk_50
+set_instance_assignment -name PCI_IO "ON" -to d_in
 
 
 

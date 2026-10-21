@@ -17,33 +17,59 @@ module mag_enc_test (
 	output [3:0] mg,
 	output [6:0] ssd1, ssd2, ssd3, ssd4);
 	
+	//Generate Clock to interact with magnetic encoder
 	logic clk_15;
-	
 	pll pll_inst (
 		.reset (~reset),
 		.clk_in (clk_50),
 		.c2 (clk_15));
 	
+	//Handle CDC between clk_15 (magnetic encoder) and clk_50 (logic)
 	logic me_done;
 	logic [13:0] angle_out;
 	logic [13:0] angle_reg, angle_reg2;
-	always_ff @(posedge me_done) angle_reg <= angle_out;
-	
-	logic [27:0] clk_ladder;
-	
-	always_ff @(posedge clk_15 or negedge reset) begin
-		if(~reset)
-			clk_ladder <= 28'b0;
-		else clk_ladder <= clk_ladder + 28'b1;
+	logic me_reg1, me_reg2;
+	always_ff @(posedge clk_50 or negedge reset) begin
+		if(~reset) begin
+			me_reg1 <= 1'b0;
+			me_reg2 <= 1'b0;
+			angle_reg <= 14'b0;
+		end else begin
+			me_reg1 <= me_done;
+			me_reg2 <= me_reg2;
+			if(me_reg2 & ~me_reg1) begin
+				angle_reg <= angle_out;
+			end			
 	end
 	
-	always_ff @(posedge clk_ladder[10]) angle_reg2 <= angle_reg;
+	//Slowly clock data to seven segment displays
+	logic [15:0] clk_count;
+	logic clk_en;
 	
+	always_ff @(posedge clk_50 or negedge reset) begin
+		if(~reset) begin
+			clk_count <= 16'b0;
+			clk_en <= 1'b0;
+		end else begin 
+			clk_count <= clk_count + 28'b1;
+			if(clk_count = 16'hFFFF) clk_en <= 1'b1;
+			else clk_en <= 1'b0;
+	end
+	
+	always_ff @(posedge clk_50 or negedge reset) begin
+		if(~reset) 
+			angle_reg2 <= 14'b0;
+		else if(clk_en) 
+			angle_reg2 <= angle_reg;
+	end
+	
+	//Unchecked data from magnetic encoder
 	logic [23:0] raw_data;
 	assign mg = raw_data[9:6];
 	
+	//Module Instantiations
 	magnetic_encoder me (
-		.mag_clk(clk_ladder[0]),
+		.mag_clk(clk_15),
 		.reset(reset),
 		.d_in(d_in),
 		.enable(1'b1),
