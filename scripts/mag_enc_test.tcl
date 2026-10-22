@@ -16,8 +16,8 @@ if {![file exists $build_dir]} {
 set project_path "$build_dir/$project_name"
 
 if {[project_exists $project_path]} {
-	project_clean $project_path
 	project_open $project_path
+	#project_clean
 } else {
 	project_new $project_path
 	project_open $project_path
@@ -29,6 +29,9 @@ set_global_assignment -name FAMILY "Max 10"
 set_global_assignment -name DEVICE "10M50DAF484C7G"
 set_global_assignment -name TOP_LEVEL_ENTITY "$top_level_entity"
 set_global_assignment -name NUM_PARALLEL_PROCESSORS 16
+
+# Ignore LogicLock warning
+set_global_assignment -name MESSAGE_DISABLE 292013
 
 # Add Project Source Files
 set rtl_files [glob -nocomplain ../../rtl/*.sv]

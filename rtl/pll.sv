@@ -12,7 +12,7 @@
 module pll #(
 	parameter A = 1,
 	parameter B = 1,
-	parameter C = 1 (
+	parameter C = 1) (
 	input reset,
 	input clk_in,
 	output logic c0,
@@ -35,7 +35,7 @@ module pll #(
 		altpll_component.clk1_multiply_by = 200, 
 		altpll_component.clk2_divide_by = 648,
 		altpll_component.clk2_multiply_by = 200, 
-		altpll_component.compensate_clock = "CLK0",
+		altpll_component.compensate_clock = A == 1 ? "CLK0" : (B == 1 ? "CLK1" : "CLK2"),
 		altpll_component.inclk0_input_frequency = 20000,
 		altpll_component.intended_device_family = "MAX 10",
 		altpll_component.operation_mode = "NORMAL",

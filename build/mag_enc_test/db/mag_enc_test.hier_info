@@ -1,6 +1,6 @@
 |mag_enc_test
-clk_50 => clk_50.IN1
-reset => reset.IN1
+clk_50 => clk_50.IN2
+reset => reset.IN2
 d_in => d_in.IN1
 mag_clk_out << magnetic_encoder:me.clk_out
 csn << magnetic_encoder:me.csn
@@ -38,6 +38,14 @@ ssd4[5] << single_ssd:s4.ssd
 ssd4[6] << single_ssd:s4.ssd
 
 
+|mag_enc_test|reset_sync:r50
+clk => reset_sync~reg0.CLK
+clk => reset_reg.CLK
+reset => reset_sync~reg0.ACLR
+reset => reset_reg.ACLR
+reset_sync <= reset_sync~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
 |mag_enc_test|pll:pll_inst
 reset => reset.IN1
 clk_in => clk_in.IN1
@@ -47,12 +55,12 @@ c2 <= altpll:altpll_component.clk
 
 
 |mag_enc_test|pll:pll_inst|altpll:altpll_component
-inclk[0] => altpll_pjb1:auto_generated.inclk[0]
-inclk[1] => altpll_pjb1:auto_generated.inclk[1]
+inclk[0] => altpll_12c1:auto_generated.inclk[0]
+inclk[1] => altpll_12c1:auto_generated.inclk[1]
 fbin => ~NO_FANOUT~
 pllena => ~NO_FANOUT~
 clkswitch => ~NO_FANOUT~
-areset => altpll_pjb1:auto_generated.areset
+areset => altpll_12c1:auto_generated.areset
 pfdena => ~NO_FANOUT~
 clkena[0] => ~NO_FANOUT~
 clkena[1] => ~NO_FANOUT~
@@ -106,7 +114,7 @@ fref <= <GND>
 icdrclk <= <GND>
 
 
-|mag_enc_test|pll:pll_inst|altpll:altpll_component|altpll_pjb1:auto_generated
+|mag_enc_test|pll:pll_inst|altpll:altpll_component|altpll_12c1:auto_generated
 areset => pll1.ARESET
 clk[0] <= pll1.CLK
 clk[1] <= pll1.CLK1
@@ -115,6 +123,14 @@ clk[3] <= pll1.CLK3
 clk[4] <= pll1.CLK4
 inclk[0] => pll1.CLK
 inclk[1] => pll1.CLK1
+
+
+|mag_enc_test|reset_sync:r15
+clk => reset_sync~reg0.CLK
+clk => reset_reg.CLK
+reset => reset_sync~reg0.ACLR
+reset => reset_reg.ACLR
+reset_sync <= reset_sync~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |mag_enc_test|magnetic_encoder:me

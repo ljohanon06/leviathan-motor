@@ -18,7 +18,7 @@ module mag_enc_test (
 	output [6:0] ssd1, ssd2, ssd3, ssd4);
 	
 	logic reset_50, reset_15;
-	reset_sync (
+	reset_sync r50 (
 		.clk(clk_50),
 		.reset(reset),
 		.reset_sync(reset_50));
@@ -28,9 +28,11 @@ module mag_enc_test (
 	pll #(.A(0), .B(0)) pll_inst (
 		.reset (~reset),
 		.clk_in (clk_50),
+		.c0(),
+		.c1(),
 		.c2 (clk_15));
 	
-	reset_sync (
+	reset_sync r15 (
 		.clk(clk_15),
 		.reset(reset),
 		.reset_sync(reset_15));
@@ -47,10 +49,11 @@ module mag_enc_test (
 			angle_reg <= 14'b0;
 		end else begin
 			me_reg1 <= me_done;
-			me_reg2 <= me_reg2;
+			me_reg2 <= me_reg1;
 			if(me_reg2 & ~me_reg1) begin
 				angle_reg <= angle_out;
-			end			
+			end	
+		end
 	end
 	
 	//Slowly clock data to seven segment displays
@@ -62,9 +65,10 @@ module mag_enc_test (
 			clk_count <= 16'b0;
 			clk_en <= 1'b0;
 		end else begin 
-			clk_count <= clk_count + 28'b1;
-			if(clk_count = 16'hFFFF) clk_en <= 1'b1;
+			clk_count <= clk_count + 16'b1;
+			if(clk_count == 16'hFFFF) clk_en <= 1'b1;
 			else clk_en <= 1'b0;
+		end
 	end
 	
 	always_ff @(posedge clk_50 or negedge reset_50) begin
@@ -103,7 +107,7 @@ module mag_enc_test (
 		.ssd(ssd3));
 		
 	single_ssd s4 (
-		.in(angle_reg2[13:12]),
+		.in({2'b0,angle_reg2[13:12]}),
 		.ssd(ssd4));
 		
 endmodule

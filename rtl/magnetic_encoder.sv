@@ -82,7 +82,8 @@ module magnetic_encoder(
 	
 	crc checksum (
 		.in({data_shift[23:10],data_shift[5:0]}),
-		.met_crc(met_crc));
+		.met_crc(met_crc),
+		.crc_num());
 	
 endmodule
 
