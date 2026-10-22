@@ -1,0 +1,18 @@
+Fitter Status : Successful - Thu Oct 22 00:55:00 2026
+Quartus Prime Version : 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+Revision Name : mag_enc_test_fifo
+Top-level Entity Name : mag_enc_test_fifo
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total logic elements : 175 / 49,760 ( < 1 % )
+    Total combinational functions : 116 / 49,760 ( < 1 % )
+    Dedicated logic registers : 125 / 49,760 ( < 1 % )
+Total registers : 134
+Total pins : 20 / 360 ( 6 % )
+Total virtual pins : 0
+Total memory bits : 0 / 1,677,312 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )

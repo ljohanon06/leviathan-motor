@@ -1,5 +1,5 @@
 Timing Analyzer report for mag_enc_test
-Wed Oct 21 23:41:28 2026
+Thu Oct 22 00:23:26 2026
 Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
 
 
@@ -93,13 +93,13 @@ on the Quartus Prime software download page.
 ; Number detected on machine ; 22          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.28        ;
+; Average used               ; 1.23        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.0%      ;
-;     Processors 3-16        ;   1.8%      ;
+;     Processor 2            ;   1.6%      ;
+;     Processors 3-16        ;   1.5%      ;
 +----------------------------+-------------+
 
 
@@ -108,7 +108,7 @@ on the Quartus Prime software download page.
 +------------------------------------+--------+--------------------------+
 ; SDC File Path                      ; Status ; Read at                  ;
 +------------------------------------+--------+--------------------------+
-; ../../constraints/mag_enc_test.sdc ; OK     ; Wed Oct 21 23:41:26 2026 ;
+; ../../constraints/mag_enc_test.sdc ; OK     ; Thu Oct 22 00:23:24 2026 ;
 +------------------------------------+--------+--------------------------+
 
 
@@ -711,7 +711,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
-    Info: Processing started: Wed Oct 21 23:41:25 2026
+    Info: Processing started: Thu Oct 22 00:23:23 2026
 Info: Command: quartus_sta mag_enc_test -c mag_enc_test
 Info: qsta_default_script.tcl version: #1
 Info (20032): Parallel compilation is enabled and will use up to 16 processors
@@ -834,7 +834,7 @@ Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 872 megabytes
-    Info: Processing ended: Wed Oct 21 23:41:28 2026
+    Info: Processing ended: Thu Oct 22 00:23:26 2026
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 

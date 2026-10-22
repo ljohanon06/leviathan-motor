@@ -1,5 +1,5 @@
 Fitter report for mag_enc_test
-Wed Oct 21 23:41:19 2026
+Thu Oct 22 00:23:17 2026
 Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
 
 
@@ -68,7 +68,7 @@ on the Quartus Prime software download page.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Wed Oct 21 23:41:19 2026           ;
+; Fitter Status                      ; Successful - Thu Oct 22 00:23:17 2026           ;
 ; Quartus Prime Version              ; 25.1std.0 Build 1129 10/21/2025 SC Lite Edition ;
 ; Revision Name                      ; mag_enc_test                                    ;
 ; Top-level Entity Name              ; mag_enc_test                                    ;
@@ -153,7 +153,7 @@ on the Quartus Prime software download page.
 ; Number detected on machine ; 22          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.14        ;
+; Average used               ; 1.15        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
@@ -1422,7 +1422,7 @@ Info (176353): Automatically promoted node pll:pll_inst|altpll:altpll_component|
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176218): Packed 1 registers into blocks of type I/O Input Buffer
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:02
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -1436,7 +1436,7 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.11 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.10 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -1448,10 +1448,10 @@ Warning (169177): 3 pins must meet Intel FPGA requirements for 3.3-, 3.0-, and 2
     Info (169178): Pin d_in uses I/O standard 3.3-V LVTTL at AA6 File: /home/levijohanon/Projects/leviathan-motor/tb/hardware_tests/mag_enc_test.sv Line: 14
 Info (144001): Generated suppressed messages file /home/levijohanon/Projects/leviathan-motor/build/mag_enc_test/mag_enc_test.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 2279 megabytes
-    Info: Processing ended: Wed Oct 21 23:41:19 2026
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:16
+    Info: Peak virtual memory: 2273 megabytes
+    Info: Processing ended: Thu Oct 22 00:23:18 2026
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:17
 
 
 +----------------------------+

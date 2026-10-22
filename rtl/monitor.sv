@@ -36,6 +36,7 @@ module monitor #(parameter N = 2, //Bytes sent, max 16
 	logic [5:0] crc_num;
 	crc #(.BIT_WIDTH(B*8)) crc (
 		.in({data_reg[B-1:0],6'b0}),
+		.met_crc(),
 		.crc_num(crc_num));
 	
 	always_ff @(posedge clk or negedge reset) begin

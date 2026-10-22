@@ -1,0 +1,21 @@
+
+State Machine - |mag_enc_test_fifo|monitor:mon|state
+Name state.data state.crc_gen2 state.crc_gen1 state.idle 
+state.idle 0 0 0 0 
+state.crc_gen1 0 0 1 1 
+state.crc_gen2 0 1 0 1 
+state.data 1 0 0 1 
+
+State Machine - |mag_enc_test_fifo|monitor:mon|fifo_ft232h:fifo|state
+Name state.dvl_drh state.dvh_drh state.dvh_drl state.dvl_drl 
+state.dvl_drl 0 0 0 0 
+state.dvh_drl 0 0 1 1 
+state.dvh_drh 0 1 0 1 
+state.dvl_drh 1 0 0 1 
+
+State Machine - |mag_enc_test_fifo|monitor:mon|fifo_ft232h:fifo|fifo_ft232h_cdc:cdc|state
+Name state.dvl_drh state.dvh_drh state.dvh_drl state.dvl_drl 
+state.dvl_drl 0 0 0 0 
+state.dvh_drl 0 0 1 1 
+state.dvh_drh 0 1 0 1 
+state.dvl_drh 1 0 0 1 

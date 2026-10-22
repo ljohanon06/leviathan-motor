@@ -20,32 +20,50 @@ module mag_enc_test_fifo (
 	output [7:0] ft232_data,
 	output wr);
 	
-	logic clk_15;
+	logic reset_50, reset_15;
+	reset_sync r50 (
+		.clk(clk_50),
+		.reset(reset),
+		.reset_sync(reset_50));
 	
-	pll pll_inst (
+	//Generate Clock to interact with magnetic encoder
+	logic clk_15;
+	pll #(.A(0), .B(0)) pll_inst (
 		.reset (~reset),
 		.clk_in (clk_50),
+		.c0(),
+		.c1(),
 		.c2 (clk_15));
+	
+	reset_sync r15 (
+		.clk(clk_15),
+		.reset(reset),
+		.reset_sync(reset_15));
 	
 	logic me_done;
 	logic [13:0] angle_out;
-	logic [13:0] angle_reg;
-	always_ff @(posedge me_done) angle_reg <= angle_out;
-	
-	logic [27:0] clk_ladder;
-	
-	always_ff @(posedge clk_15 or negedge reset) begin
-		if(~reset)
-			clk_ladder <= 28'b0;
-		else clk_ladder <= clk_ladder + 28'b1;
+	logic [13:0] angle_reg, angle_reg2;
+	logic me_reg1, me_reg2;
+	always_ff @(posedge clk_50 or negedge reset_50) begin
+		if(~reset_50) begin
+			me_reg1 <= 1'b0;
+			me_reg2 <= 1'b0;
+			angle_reg <= 14'b0;
+		end else begin
+			me_reg1 <= me_done;
+			me_reg2 <= me_reg1;
+			if(me_reg2 & ~me_reg1) begin
+				angle_reg <= angle_out;
+			end	
+		end
 	end
 	
 	logic [23:0] raw_data;
 	assign mg = raw_data[9:6];
 	
 	magnetic_encoder me (
-		.mag_clk(clk_ladder[0]),
-		.reset(reset),
+		.mag_clk(clk_15),
+		.reset(reset_15),
 		.d_in(d_in),
 		.enable(1'b1),
 		.csn(csn),
@@ -56,7 +74,7 @@ module mag_enc_test_fifo (
 		
 	monitor #(.N(2)) mon (
 		.clk(clk_50),
-		.reset(reset),
+		.reset(reset_50),
 		.data_input({2'b0,angle_reg}),
 		.data_write(me_done),
 		.ft232_clk(ft232_clk),

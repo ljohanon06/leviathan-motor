@@ -1,0 +1,112 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2025  Altera Corporation. All rights reserved.
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, the Altera Quartus Prime License Agreement,
+# the Altera IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Altera and sold by Altera or its authorized distributors.  Please
+# refer to the Altera Software License Subscription Agreements 
+# on the Quartus Prime software download page.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+# Date created = 00:46:11  October 22, 2026
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		mag_enc_test_fifo_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Intel recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Max 10"
+set_global_assignment -name DEVICE 10M50DAF484C7G
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 25.1STD.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "00:46:11  OCTOBER 22, 2026"
+set_global_assignment -name LAST_QUARTUS_VERSION "25.1std.0 Lite Edition"
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 16
+set_global_assignment -name MESSAGE_DISABLE 292013
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/single_motor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/adc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/current_normalizer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/current_adder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/angle_normalizer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/clarke_transform.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/cordic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/cordic_full.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/fifo_ft232h_cdc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/fifo_ft232h.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/forward_transform.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/inverse_clarke.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/inverse_transform.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/inverse_park.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/park_transform.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/single_pwm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/single_ssd.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/triple_pwm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/two_to_sign.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/voltage_normalizer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/crc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/monitor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/reset_sync.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/magnetic_encoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/../../rtl/pll.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../tb/hardware_tests/mag_enc_test_fifo.sv
+set_location_assignment PIN_AA7 -to csn
+set_location_assignment PIN_AA6 -to d_in
+set_location_assignment PIN_AA5 -to mag_clk_out
+set_location_assignment PIN_A7 -to reset
+set_location_assignment PIN_P11 -to clk_50
+set_location_assignment PIN_A9 -to mg[1]
+set_location_assignment PIN_A10 -to mg[2]
+set_location_assignment PIN_B10 -to mg[3]
+set_location_assignment PIN_A8 -to mg[0]
+set_location_assignment PIN_W9 -to ft232_clk
+set_location_assignment PIN_W8 -to txe
+set_location_assignment PIN_W10 -to wr
+set_location_assignment PIN_W5 -to ft232_data[0]
+set_location_assignment PIN_AA14 -to ft232_data[1]
+set_location_assignment PIN_W12 -to ft232_data[2]
+set_location_assignment PIN_AB12 -to ft232_data[3]
+set_location_assignment PIN_AB11 -to ft232_data[4]
+set_location_assignment PIN_AB10 -to ft232_data[5]
+set_location_assignment PIN_AA9 -to ft232_data[6]
+set_location_assignment PIN_AA8 -to ft232_data[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to csn
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to d_in
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to mag_clk_out
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to mg[*]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ft232_clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to txe
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to wr
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ft232_data[*]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to wr
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to ft232_data[*]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to csn
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to mag_clk_out
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to mg[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to mg[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to mg[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to mg[0]
+set_global_assignment -name SDC_FILE ../../constraints/mag_enc_test_fifo.sdc
+set_global_assignment -name TOP_LEVEL_ENTITY mag_enc_test_fifo

@@ -20,7 +20,6 @@ if {[project_exists $project_path]} {
 	#project_clean
 } else {
 	project_new $project_path
-	project_open $project_path
 }
 puts "Project Created and Opened"
 
@@ -46,8 +45,8 @@ puts "Added Source Files"
 # Other Project Files
 source "../../constraints/${top_level_entity}_pins.tcl"
 puts "Added Pin Assignments"
-#set_global_assignment -name SDC_FILE "../../constraints/${project_name}.sdc"
-#puts "Added SDC file"
+set_global_assignment -name SDC_FILE "../../constraints/${project_name}.sdc"
+puts "Added SDC file"
 
 export_assignments
 
