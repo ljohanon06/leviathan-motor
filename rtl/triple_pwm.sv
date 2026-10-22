@@ -81,7 +81,7 @@ module triple_pwm (
 			v2_reg <= 18'b0;
 			v3_reg <= 18'b0;
 			enable_reg <= 1'b0;
-			pwm_count <= 1'b0;
+			pwm_count <= 11'b0;
 		end
 		else begin
 			if(enable & ~enable_reg) begin //Enable signal recieved
@@ -93,7 +93,7 @@ module triple_pwm (
 			if(enable_reg) begin //Main Logic
 				if(pwm_count == 11'd1114) begin
 					enable_reg <= 1'b0;
-					pwm_count <= 1'b0;
+					pwm_count <= 11'b0;
 				end else pwm_count <= pwm_count + 11'b1;
 			end
 		end

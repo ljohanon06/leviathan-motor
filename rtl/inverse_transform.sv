@@ -25,6 +25,22 @@ module inverse_transform (
 	logic [17:0] va; //Signed b16.b15b14...
 	logic [17:0] vb;
 	
+	logic [17:0] v1_int;
+	logic [17:0] v2_int;
+	logic [17:0] v3_int;
+	
+	always_ff @(posedge clk or negedge reset) begin
+		if(~reset) begin
+			v1 <= 18'b0;
+			v2 <= 18'b0;
+			v3 <= 18'b0;
+		end else begin
+			v1 <= v1_int;
+			v2 <= v2_int;
+			v3 <= v3_int;
+		end
+	end
+	
 	inverse_park ipt (
 		.clk(clk),
 		.reset(reset),
@@ -42,8 +58,8 @@ module inverse_transform (
 		.reset(reset),
 		.va(va),
 		.vb(vb),
-		.v1(v1),
-		.v2(v2),
-		.v3(v3));
+		.v1(v1_int),
+		.v2(v2_int),
+		.v3(v3_int));
 
 endmodule

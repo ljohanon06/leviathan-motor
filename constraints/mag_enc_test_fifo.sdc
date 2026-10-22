@@ -28,7 +28,7 @@ set_false_path -from [get_ports reset]
 set_multicycle_path -setup -from [get_cells {me|checksum|*}] -to [get_cells {me|checksum|*}] 2
 set_multicycle_path -hold -from [get_cells {me|checksum|*}] -to [get_cells {me|checksum|*}] 1
 
-set_multicycle_path -setup -from [get_cells {me|checksum|*}] -to [get_cells {mon|crc|*}] 2
-set_multicycle_path -hold -from [get_cells {me|checksum|*}] -to [get_cells {mon|crc|*}] 1
+set_multicycle_path -setup -from [get_cells {mon|crc|*}] -to [get_cells {mon|crc|*}] 2
+set_multicycle_path -hold -from [get_cells {mon|crc|*}] -to [get_cells {mon|crc|*}] 1
 
 derive_clock_uncertainty

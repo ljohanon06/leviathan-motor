@@ -34,9 +34,17 @@ module inverse_clarke(
 	assign v2_sum = v21_out + v22_out;
 	assign v3_sum = v31_out + v32_out;
 	
-	assign v1 = v11_out[34:17];
-	assign v2 = v2_sum[34:17];
-	assign v3 = v3_sum[34:17];
+	always_ff @(posedge clk or negedge reset) begin
+		if(~reset) begin
+			v1 <= 18'b0;
+			v2 <= 18'b0;
+			v3 <= 18'b0;
+		end else begin
+			v1 <= v11_out[34:17];
+			v2 <= v2_sum[34:17];
+			v3 <= v3_sum[34:17];
+		end
+	end
 	
 	
 	lpm_mult #(

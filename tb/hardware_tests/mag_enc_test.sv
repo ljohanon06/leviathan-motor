@@ -75,7 +75,7 @@ module mag_enc_test (
 		if(~reset_50) 
 			angle_reg2 <= 14'b0;
 		else if(clk_en) 
-			angle_reg2 <= angle_reg;
+			angle_reg2 <= raw_data[23:10];
 	end
 	
 	//Unchecked data from magnetic encoder

@@ -31,8 +31,15 @@ module inverse_park(
 	assign va_sum = (cos_sign ? -va1_out : va1_out) + (sin_sign ? va2_out : -va2_out);
 	assign vb_sum = (sin_sign ? -vb1_out : vb1_out) + (cos_sign ? -vb2_out : vb2_out);
 	
-	assign va = va_sum[33:16];
-	assign vb = vb_sum[33:16];
+	always_ff @(posedge clk or negedge reset) begin
+		if(~reset) begin
+			va <= 18'b0;
+			vb <= 18'b0;
+		end else begin
+			va <= va_sum[33:16];
+			vb <= vb_sum[33:16];
+		end
+	end
 	
 	lpm_mult #(
 		.lpm_widtha(18),

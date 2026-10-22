@@ -49,6 +49,8 @@ module magnetic_encoder(
 			clk_out_set <= 1'b0;
 			state <= idle;
 			done <= 1'b0;
+			raw_data <= '0;
+			angle_out <= '0;
 		end
 		else begin
 			if(state == idle && enable) begin

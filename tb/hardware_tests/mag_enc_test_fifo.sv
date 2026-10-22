@@ -61,6 +61,20 @@ module mag_enc_test_fifo (
 	logic [23:0] raw_data;
 	assign mg = raw_data[9:6];
 	
+	logic [11:0] clk_count;
+	logic clk_en;
+	
+	always_ff @(posedge clk_50 or negedge reset_50) begin
+		if(~reset_50) begin
+			clk_count <= 12'b0;
+			clk_en <= 1'b0;
+		end else begin 
+			clk_count <= clk_count + 8'b1;
+			if(clk_count >= 12'hFF0) clk_en <= 1'b1;
+			else clk_en <= 1'b0;
+		end
+	end
+	
 	magnetic_encoder me (
 		.mag_clk(clk_15),
 		.reset(reset_15),
@@ -76,7 +90,7 @@ module mag_enc_test_fifo (
 		.clk(clk_50),
 		.reset(reset_50),
 		.data_input({2'b0,angle_reg}),
-		.data_write(me_done),
+		.data_write(clk_en),
 		.ft232_clk(ft232_clk),
 		.txe(txe),
 		.ft232_data(ft232_data),
