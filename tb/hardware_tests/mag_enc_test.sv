@@ -75,7 +75,7 @@ module mag_enc_test (
 		if(~reset_50) 
 			angle_reg2 <= 14'b0;
 		else if(clk_en) 
-			angle_reg2 <= raw_data[23:10];
+			angle_reg2 <= angle_reg;
 	end
 	
 	//Unchecked data from magnetic encoder
@@ -83,7 +83,7 @@ module mag_enc_test (
 	assign mg = raw_data[9:6];
 	
 	//Module Instantiations
-	magnetic_encoder me (
+	magnetic_encoder #(.OFFSET(14'h0CF0)) me (
 		.mag_clk(clk_15),
 		.reset(reset_15),
 		.d_in(d_in),

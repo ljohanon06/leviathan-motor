@@ -8,7 +8,10 @@
  * See the LICENSE file in the project root for full license information.
  */
 	
-module magnetic_encoder(
+//Determine offset by passing current from C to B
+//This value plus 14'h0800 is the offset
+module magnetic_encoder #(
+	parameter logic [13:0] OFFSET = 14'b0) (
 	input mag_clk,
 	input reset,
 	input enable,
@@ -75,7 +78,7 @@ module magnetic_encoder(
 				raw_data <= data_shift;
 				if(met_crc) begin //Only set done if checksum matches
 					done <= 1'b1;
-					angle_out <= data_shift[23:10];
+					angle_out <= data_shift[23:10] - OFFSET;
 				end
 				else done <= 1'b0; 
 			end
