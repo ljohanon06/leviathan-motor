@@ -16,6 +16,7 @@ if {![file exists $build_dir]} {
 set project_path "$build_dir/$project_name"
 
 if {[project_exists $project_path]} {
+	project_clean $project_path
 	project_open $project_path
 } else {
 	project_new $project_path
