@@ -1,18 +1,12 @@
-#50 MHz clock (clk_50) coming from PIN_P11
+# 50 MHz clock (clk_50) coming from PIN_P11
 create_clock -name clk_50 -period 20.000 [get_ports clk_50]
 derive_pll_clocks
 derive_clock_uncertainty
 
-create_generated_clock -name ladder_bit_0 \
-    -source [get_ports clk_50] \
-    -divide_by 2 \
-    [get_registers {clk_ladder[0]}]
+# Magnetic Encoder Requirements, Data read 15ns after rising edge
+create_generated_clock -name mag_enc_clk -source [get_pins {pll_inst|c2}] [get_ports mag_clk_out]
+set_input_delay -clock mag_clock_out -max 15.5 [get_ports d_in]
+set_input_delay -clock mag_clock_out -min 0.5 [get_ports d_in]
 
-create_generated_clock -name ladder_bit_10 \
-    -source [get_ports clk_50] \
-    -divide_by 12048 \
-    [get_registers {clk_ladder[10]}]
-    
-set_clock_groups -asynchronous \
-    -group [get_clocks {ladder_bit_10}] \
-    -group [get_clocks {pll_inst|altpll_component|auto_generated|pll1|clk[2]}]
+# Handle async reset
+set_false_path -from [get_ports reset]

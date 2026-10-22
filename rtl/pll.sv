@@ -8,7 +8,11 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module pll (
+//A, B, C are set to 1 if clock is used
+module pll #(
+	parameter A = 1,
+	parameter B = 1,
+	parameter C = 1 (
 	input reset,
 	input clk_in,
 	output logic c0,
@@ -37,9 +41,9 @@ module pll (
 		altpll_component.operation_mode = "NORMAL",
 		altpll_component.port_areset = "PORT_USED",
 		altpll_component.port_inclk0 = "PORT_USED",
-		altpll_component.port_clk0 = "PORT_USED",
-		altpll_component.port_clk1 = "PORT_USED",
-		altpll_component.port_clk2 = "PORT_USED",
+		altpll_component.port_clk0 = A == 1 ? "PORT_USED" : "PORT_UNUSED",
+		altpll_component.port_clk1 = B == 1 ? "PORT_USED" : "PORT_UNUSED",
+		altpll_component.port_clk2 = C == 1 ? "PORT_USED" : "PORT_UNUSED",
 		altpll_component.port_clk3 = "PORT_UNUSED",
 		altpll_component.port_clk4 = "PORT_UNUSED",
 		altpll_component.width_clock = 5;

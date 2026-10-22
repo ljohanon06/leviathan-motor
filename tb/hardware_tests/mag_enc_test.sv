@@ -19,7 +19,7 @@ module mag_enc_test (
 	
 	//Generate Clock to interact with magnetic encoder
 	logic clk_15;
-	pll pll_inst (
+	pll #(.A(0), .B(0)) pll_inst (
 		.reset (~reset),
 		.clk_in (clk_50),
 		.c2 (clk_15));

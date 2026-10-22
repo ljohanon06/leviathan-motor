@@ -8,6 +8,7 @@
  * See the LICENSE file in the project root for full license information.
  */
 
+//Due to large combinational logic, give a few clock cycles
 module crc #(
 	BIT_WIDTH = 14,
 	CRC_WIDTH = 7,

@@ -21,7 +21,7 @@ module magnetic_encoder(
 	
 	typedef enum logic [4:0] {
 		idle, CSN_low, CLK_start, d[13:0],
-		m[3:0], crc[5:0], CSN_high} mag_enc_state_t;
+		m[3:0], crc[5:0], CRC_check, CSN_high} mag_enc_state_t;
 		
 	mag_enc_state_t state;
 	logic [23:0] data_shift;
@@ -63,9 +63,11 @@ module magnetic_encoder(
 				state <= mag_enc_state_t'(state + 5'b1);
 				data_shift <= {data_shift[22:0],d_in};
 			end else if(state == crc0) begin
-				state <= CSN_high;
+				state <= CRC_check;
 				data_shift <= {data_shift[22:0],d_in};
 				clk_out_set <= 1'b0;
+			end else if(state == CRC_check) begin //Give a clock cycle for CRC to compute
+				state <= CSN_high;
 			end else if(state == CSN_high) begin
 				state <= idle;
 				raw_data <= data_shift;

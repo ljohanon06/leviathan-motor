@@ -32,6 +32,7 @@ module monitor #(parameter N = 2, //Bytes sent, max 16
 	
 	logic prev_dw;
 	
+	//Given 2 clock cycles to do crc
 	logic [5:0] crc_num;
 	crc #(.BIT_WIDTH(B*8)) crc (
 		.in({data_reg[B-1:0],6'b0}),
