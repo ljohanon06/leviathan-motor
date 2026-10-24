@@ -8,6 +8,7 @@
  * See the LICENSE file in the project root for full license information.
  */
 
+//Max voltage input is sqrt(3)/2 = 18'h1BB67, - = 18'h24499
 module inverse_park(
 	input clk,
 	input reset,

@@ -38,6 +38,9 @@ set_location_assignment	PIN_E14	-to {	debug[6]	}
 set_location_assignment	PIN_D14	-to {	debug[7]	}
 set_location_assignment	PIN_A11	-to {	debug[8]	}
 set_location_assignment	PIN_B11	-to {	debug[9]	}
+set_location_assignment	PIN_A14	-to {	voltage[0]	}
+set_location_assignment	PIN_B14	-to {	voltage[1]	}
+set_location_assignment	PIN_F15	-to {	voltage[2]	}
 
 
 
@@ -65,6 +68,7 @@ set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	pwm_b_low	}
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	pwm_c_high	}
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	pwm_c_low	}
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	debug[*]	}
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {voltage[*]}
 
 
 #Set IO Standard for outputs

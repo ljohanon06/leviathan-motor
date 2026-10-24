@@ -10,6 +10,7 @@
 
 module motor_test(
 	input on_switch,
+	input [2:0] voltage,
 	input clk_50,
 	input reset,
 	input sdo1, //ADC Inputs and Outputs
@@ -69,10 +70,8 @@ module motor_test(
 		.reset_sync(reset_15));
 	
 	//State Variables
-	typedef enum logic [2:0] {idle, one, two, zero, neg_one} voltage_state_t;
 	logic [10:0] pwm_count;
 	logic [23:0] cycle_count;
-	voltage_state_t state;
 	
 	logic pwm_enable;
 	logic mag_enable;
@@ -86,34 +85,22 @@ module motor_test(
 	
 	//Timing Information
 	always_ff @(posedge clk_222 or negedge reset_222) begin
-			if(~reset_222) begin
-				cycle_count <= 24'b0;
-				state <= idle;
-			end else begin
-				case (state)
-					idle: if(on_switch) begin
-								state <= one;
-								cycle_count <= 24'b0; end
-					one: if(cycle_count > 24'd200000) state <= two;
-					two: if(cycle_count > 24'd400000) state <= zero;
-					zero: if(cycle_count > 24'd600000) state <= neg_one;
-					neg_one: if(cycle_count > 24'd800000) state <= idle;
-				endcase	
-				vq <= 18'h18000;
-				/*
-				case(state)
-					idle: vq <= 18'b0;
-					one: vq <= 18'h800;
-					two: vq <= 18'h1000;
-					zero: vq <= 18'b0;
-					neg_one: vq <= -18'h800;
-				endcase
-				*/
-				if (pwm_count == 10'd1020 && state != idle)
-					cycle_count <= cycle_count + 24'b1;
-				if(pwm_count >= 10'd1020 && state != idle) cycle_inc <= 1'b1;
-				else cycle_inc <= 1'b0;					
-			end
+		if(~reset_222) begin
+			cycle_count <= 24'b0;
+			vq <= 18'b0;
+		end else if(~on_switch) begin
+			cycle_count <= 24'b0;
+			vq <= 18'b0;
+		end else begin
+			if(~voltage[2])
+				vq <= {1'b0,voltage[1:0],15'b0};
+			else vq <= {1'b1,~voltage[1:0],15'h7FFF};
+			
+			if (pwm_count == 10'd1020)
+				cycle_count <= cycle_count + 24'b1;
+			if(pwm_count >= 10'd1020) cycle_inc <= 1'b1;
+			else cycle_inc <= 1'b0;					
+		end
 	end
 	
 	//Clock domain crossing for cycle count and data_write
@@ -142,10 +129,10 @@ module motor_test(
 	logic [13:0] adc_measurement2;
 	logic [13:0] angle_reg;
 	
-	monitor #(.N(6)) mon (
+	monitor #(.N(7)) mon (
 		.clk(clk_100),
 		.reset(reset_100),
-		.data_input({8'b0,cycle_reg,2'b0,angle_reg}),
+		.data_input({8'b0,cycle_reg,2'b0,angle_reg,5'b0,voltage}),
 		.data_write(dw_2),
 		.ft232_clk(ft232_clk),
 		.txe(txe),
