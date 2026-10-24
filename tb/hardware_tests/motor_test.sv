@@ -133,7 +133,7 @@ module motor_test(
 		.clk(clk_100),
 		.reset(reset_100),
 		.data_input({8'b0,cycle_reg,2'b0,angle_reg,5'b0,voltage}),
-		.data_write(dw_2),
+		.data_write(dw_2 & (cycle_reg[3:0] == 4'b0)), //Write every 16 cycles
 		.ft232_clk(ft232_clk),
 		.txe(txe),
 		.ft232_data(ft232_data),
