@@ -93,7 +93,9 @@ module motor_test(
 			cycle_count <= 24'b0;
 			vq <= 18'b0;
 		end else begin
-			if(~voltage[2])
+			if(voltage == 3'b011)
+				vq <= 18'h1BB60;
+			else if(~voltage[2])
 				vq <= {1'b0,voltage[1:0],15'b0};
 			else vq <= {1'b1,~voltage[1:0],15'h7FFF};
 			
