@@ -1,7 +1,7 @@
 /*
  * File        : speedometer.sv
  * Author      : Levi Johanon
- * Description : Speedometer using exponential moving average, alpha = 0.25
+ * Description : Speedometer using exponential moving average, alpha = 1/8
  *
  * Copyright (c) 2026 Levi Johanon
  * This code is licensed under the MIT License.
@@ -34,7 +34,7 @@ module speedometer (
 			//Exponential Moving Average
 			//Out = 0.75*Old + 0.25*New
 			if(count == 23'd6250000)
-				speed_hz <= (speed_hz - (speed_hz >> 1)) + (distance >> 1);
+				speed_hz <= (speed_hz - (speed_hz >> 2)) + (distance >> 2);
 		end
 	end
 endmodule	

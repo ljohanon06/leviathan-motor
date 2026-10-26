@@ -256,7 +256,7 @@ module motor_test(
 	speedometer speed (
 		.clk_100(clk_100),
 		.reset(reset_100),
-		.angle_reg(angle_reg),
+		.angle_reg(angle_reg[13:10]),
 		.speed_hz(speed_hz));
 
 	single_ssd s1 (
