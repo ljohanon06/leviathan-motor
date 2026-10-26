@@ -32,7 +32,8 @@ module motor_test(
 	input txe,
 	output [7:0] ft232_data,
 	output wr,
-	output [9:0] debug);
+	output [9:0] debug,
+	output [6:0] ssd1, ssd2, ssd3, ssd4);
 	assign debug = angle_reg[12:3];
 	
 	logic clk_100;
@@ -250,6 +251,27 @@ module motor_test(
 		.done(me_done),
 		.raw_data(),
 		.angle_out(angle_out));
+		
+	logic [15:0] speed_hz;
+	speedometer speed (
+		.clk_100(clk_100),
+		.reset(reset_100),
+		.angle_reg(angle_reg),
+		.speed_hz(speed_hz));
 
+	single_ssd s1 (
+		.in(speed_hz[3:0]),
+		.ssd(ssd1));
 	
+	single_ssd s2 (
+		.in(speed_hz[7:4]),
+		.ssd(ssd2));
+	
+	single_ssd s3 (
+		.in(speed_hz[11:8]),
+		.ssd(ssd3));
+		
+	single_ssd s4 (
+		.in(speed_hz[15:12]),
+		.ssd(ssd4));
 endmodule
