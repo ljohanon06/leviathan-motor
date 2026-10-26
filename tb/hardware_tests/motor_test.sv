@@ -240,7 +240,7 @@ module motor_test(
 		.adc(adc_measurement2),
 		.done(adc_done_2));
 		
-	magnetic_encoder me (
+	magnetic_encoder #(.OFFSET(14'h0CF0)) me (
 		.mag_clk(clk_15),
 		.reset(reset_15),
 		.d_in(d_in),
