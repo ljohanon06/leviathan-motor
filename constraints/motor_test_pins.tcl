@@ -41,6 +41,34 @@ set_location_assignment	PIN_B11	-to {	debug[9]	}
 set_location_assignment	PIN_A14	-to {	voltage[0]	}
 set_location_assignment	PIN_B14	-to {	voltage[1]	}
 set_location_assignment	PIN_F15	-to {	voltage[2]	}
+set_location_assignment	PIN_C14	-to	{ssd1[0]}
+set_location_assignment	PIN_E15	-to	{ssd1[1]}
+set_location_assignment	PIN_C15	-to	{ssd1[2]}
+set_location_assignment	PIN_C16	-to	{ssd1[3]}
+set_location_assignment	PIN_E16	-to	{ssd1[4]}
+set_location_assignment	PIN_D17	-to	{ssd1[5]}
+set_location_assignment	PIN_C17	-to	{ssd1[6]}
+set_location_assignment	PIN_C18	-to	{ssd2[0]}
+set_location_assignment	PIN_D18	-to	{ssd2[1]}
+set_location_assignment	PIN_E18	-to	{ssd2[2]}
+set_location_assignment	PIN_B16	-to	{ssd2[3]}
+set_location_assignment	PIN_A17	-to	{ssd2[4]}
+set_location_assignment	PIN_A18	-to	{ssd2[5]}
+set_location_assignment	PIN_B17	-to	{ssd2[6]}
+set_location_assignment	PIN_B20	-to	{ssd3[0]}
+set_location_assignment	PIN_A20	-to	{ssd3[1]}
+set_location_assignment	PIN_B19	-to	{ssd3[2]}
+set_location_assignment	PIN_A21	-to	{ssd3[3]}
+set_location_assignment	PIN_B21	-to	{ssd3[4]}
+set_location_assignment	PIN_C22	-to	{ssd3[5]}
+set_location_assignment	PIN_B22	-to	{ssd3[6]}
+set_location_assignment	PIN_F21	-to	{ssd4[0]}
+set_location_assignment	PIN_E22	-to	{ssd4[1]}
+set_location_assignment	PIN_E21	-to	{ssd4[2]}
+set_location_assignment	PIN_C19	-to	{ssd4[3]}
+set_location_assignment	PIN_C20	-to	{ssd4[4]}
+set_location_assignment	PIN_D19	-to	{ssd4[5]}
+set_location_assignment	PIN_E17	-to	{ssd4[6]}
 
 
 
@@ -69,6 +97,10 @@ set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	pwm_c_high	}
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	pwm_c_low	}
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	debug[*]	}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {voltage[*]}
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd1[*]}
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd2[*]}
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd3[*]}
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd4[*]}
 
 
 #Set IO Standard for outputs
@@ -87,6 +119,10 @@ set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	pwm_b_low	}
 set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	pwm_c_high	}
 set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	pwm_c_low	}
 set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	debug[*]	}
+set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	ssd1[*]	}
+set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	ssd2[*]	}
+set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	ssd3[*]	}
+set_instance_assignment	-name CURRENT_STRENGTH_NEW 8MA	-to {	ssd4[*]	}
 
 
 
