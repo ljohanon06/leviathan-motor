@@ -19,7 +19,6 @@ module fifo_ft232h_cdc(
 	output logic wr); //Write enable, active low
 	
 	logic dv1, dv2; //Data Valid flip flops
-	logic wr_control; 
 	
 	typedef enum logic [1:0] {dvl_drl, dvh_drl, dvh_drh, dvl_drh} state_t;
 	state_t state;
@@ -35,18 +34,17 @@ module fifo_ft232h_cdc(
 			dv1 <= data_valid;
 			dv2 <= dv1;
 			case(state)
-				dvl_drl: if(dv2) begin
-					state <= dvh_drl;
-					wr_control <= 1'b0;
-					wr <= 1'b1; end
-				dvh_drl: if(~txe) begin
+				dvl_drl: begin 
+					if(dv2 & ~txe)
+						state <= dvh_drl;
+					wr <= 1'b1; end					
+				dvh_drl: begin
 					state <= dvh_drh;
 					ft232_data <= data_in;
-					wr_control <= 1'b1;
-					wr <= wr_control; 
+					wr <= 1'b0; 
 					data_recieved <= 1'b1; end
 				dvh_drh: begin
-					wr <= wr_control;
+					wr <= 1'b1;
 					if(~dv2 & wr) 
 						state <= dvl_drh; end
 				dvl_drh: begin 

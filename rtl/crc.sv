@@ -20,7 +20,7 @@ module crc #(
 	localparam X = BIT_WIDTH+CRC_WIDTH-2; //19
 	
 	logic [X:0] out;
-	assign met_crc = out == '0;
+	assign met_crc = out[CRC_WIDTH-2:0] == '0;
 	assign crc_num = out[CRC_WIDTH-2:0];
 	genvar i;
 	generate

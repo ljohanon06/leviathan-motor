@@ -23,7 +23,7 @@ module monitor #(parameter N = 2, //Bytes sent, max 16
 	logic write, done; 
 	logic [7:0] data_in;
 	
-	logic [B+1:0] [7:0] data_reg;
+	logic [B+2:0] [7:0] data_reg;
 	
 	//Data is send little endian
 	typedef enum logic [1:0] {idle, crc_gen1, crc_gen2, data} state_t;
@@ -33,9 +33,9 @@ module monitor #(parameter N = 2, //Bytes sent, max 16
 	logic prev_dw;
 	
 	//Given 2 clock cycles to do crc
-	logic [5:0] crc_num;
-	crc #(.BIT_WIDTH(B*8)) crc (
-		.in({data_reg[B-1:0],6'b0}),
+	logic [7:0] crc_num;
+	crc #(.BIT_WIDTH(B*8), .CRC_WIDTH(9), .CRC(9'h131)) crc (
+		.in({data_reg[B-1:0],8'b0}),
 		.met_crc(),
 		.crc_num(crc_num));
 	
@@ -58,7 +58,7 @@ module monitor #(parameter N = 2, //Bytes sent, max 16
 				state <= crc_gen2;
 			end else if(state == crc_gen2) begin
 				state <= data;
-				data_reg <= {8'hAA,2'b0,crc_num,data_reg[B-1:0]};
+				data_reg <= {8'hAA,crc_num,data_reg[B-1:0]};
 			end else if(byte_num == B+2) begin
 				state <= idle;
 				byte_num <= 5'b0;

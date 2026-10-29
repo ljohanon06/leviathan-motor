@@ -81,8 +81,8 @@ module motor_test(
 	
 	//Logic within one clock cycle
 	assign pwm_enable = pwm_count < 11'd100;
-	assign mag_enable = 11'd10 < pwm_count && pwm_count < 11'd100;
-	assign data_write = 11'd700 < pwm_count && pwm_count < 11'd750;
+	assign mag_enable = pwm_count < 11'd100;
+	assign data_write = 11'd700 < pwm_count && pwm_count < 11'd850;
 	
 	//Timing Information
 	always_ff @(posedge clk_222 or negedge reset_222) begin
@@ -109,17 +109,20 @@ module motor_test(
 	//Clock domain crossing for cycle count and data_write
 	logic dw_1, dw_2, ci_1, ci_2;
 	logic [23:0] cycle_reg;
+	logic [2:0] voltage_reg;
 	always_ff @(posedge clk_100 or negedge reset_100) begin
 		if(~reset_100) begin
 			dw_1 <= 1'b0;
 			dw_2 <= 1'b0;
 			ci_1 <= 1'b0;
 			ci_2 <= 1'b0;
+			voltage_reg <= 3'b0;
 		end else begin
 			dw_1 <= data_write;
 			dw_2 <= dw_1;
 			ci_1 <= cycle_inc;
 			ci_2 <= ci_1;
+			voltage_reg <= voltage;
 			if(ci_2 & ~ci_1) cycle_reg <= cycle_count;
 		end
 	end
@@ -135,8 +138,8 @@ module motor_test(
 	monitor #(.N(7)) mon (
 		.clk(clk_100),
 		.reset(reset_100),
-		.data_input({8'b0,cycle_reg,2'b0,angle_reg,5'b0,voltage}),
-		.data_write(dw_2 & (cycle_reg[3:0] == 4'b0)), //Write every 16 cycles
+		.data_input({8'b0,cycle_reg,2'b0,angle_reg,5'b0,voltage_reg}),
+		.data_write(dw_2 & (cycle_reg[2:0] == 3'b0)), //Write every 8 cycles
 		.ft232_clk(ft232_clk),
 		.txe(txe),
 		.ft232_data(ft232_data),

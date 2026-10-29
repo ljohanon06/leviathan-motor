@@ -38,9 +38,9 @@ set_location_assignment	PIN_E17	-to	{ssd4[6]}
 #Set IO Standards
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	reset	}
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	clk_50	}
-set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	sdo1	}
-set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	adc_clk1	}
-set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	cs1	}
+set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	sdo	}
+set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	adc_clk	}
+set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	cs	}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd1[*]}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd2[*]}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {ssd3[*]}

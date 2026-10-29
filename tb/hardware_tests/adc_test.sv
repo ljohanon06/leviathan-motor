@@ -1,3 +1,13 @@
+/*
+ * File        : adc_test.sv
+ * Author      : Levi Johanon
+ * Description : Test the analog to digital converter
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module adc_test(
 	input clk_50,
 	input reset,
@@ -9,7 +19,7 @@ module adc_test(
 	logic [13:0] adc_measurement, adc_reg;
 	logic adc_start;
 	logic [10:0] count;
-	logic clk_100, reset_100;
+	logic clk_100, reset_50, reset_100;
 	
 	always_ff @(posedge clk_100 or negedge reset_100) begin
 		if(~reset_100) begin
@@ -22,7 +32,7 @@ module adc_test(
 				adc_start <= 1'b1;
 			else adc_start <= 1'b0;
 			
-			if(count == 11'd7FF)
+			if(count == 11'h7FF)
 				adc_reg <= adc_measurement;
 		end
 	end

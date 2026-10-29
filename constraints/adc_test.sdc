@@ -7,10 +7,10 @@ set_clock_groups -asynchronous \
 	-group [get_clocks {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
 
 
-# ADC Requirements, sdo valid 10ns after clk low
+# ADC Requirements
 create_generated_clock -name adc_clk -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] [get_ports adc_clk]
-set_input_delay -clock adc_clk -clock_fall -max 10 [get_ports sdo]
-set_input_delay -clock adc_clk -clock_fall -min 0.5 [get_ports sdo]
+set_input_delay -clock adc_clk -max 3.5 [get_ports sdo]
+set_input_delay -clock adc_clk -min 0.5 [get_ports sdo]
 
 # Handle async reset
 set_false_path -from [get_ports reset]

@@ -70,7 +70,7 @@ set_location_assignment	PIN_C20	-to	{ssd4[4]}
 set_location_assignment	PIN_D19	-to	{ssd4[5]}
 set_location_assignment	PIN_E17	-to	{ssd4[6]}
 
-
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to wr
 
 #Set IO Standards
 set_instance_assignment	-name IO_STANDARD "3.3-V LVTTL"	-to {	reset	}
