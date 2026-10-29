@@ -1,5 +1,5 @@
-# Timing
-## PLL
+# PLL
+### How it works
 A PLL works with by setting up a voltage controlled oscillator, then dividing it by a constant C. The voltage controlled oscillator needs to be setup to be between 600 and 1300 MHz to work reliably. It compares $f_{in}/N$ and $f_{VCO}/M$ and adjusts them so that they are the same frequency. M and N are user controlled numbers between 0 and 512. After this operation, $f_{VCO}$ can be divided by different constants C to get up to 5 different clock frequencies. In total for a single PLL, a unique M and N parameter is needed to set up the VCO, as well as up to 5 C parameters for the five possible clock outputs.
 
 $f_o = \frac{f_{VCO}}{C} = \frac{f_{in} M}{N C}$
