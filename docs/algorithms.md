@@ -12,7 +12,26 @@ Finally, there is a difference between an electrical rotation and an actual rota
 ### Space Vectors
 A space vector is a way to represent a three phase power system as a 2d vector. By taking the magnitudes of the three voltages or currents, giving assign the vectors 0, 120, and 240 degree directions respectively, then summing them up, you get the space vector. This represents the overall magnitude and direction of the three phase power system at a given time. 
 
-![Space Vector GIF](media/Space_Vector.gif)
+<img src="media/Space_Vector.gif" width="250" alt="Space Vector GIF">
+
+In the gif, the red, blue, and green dots represent the changing magnitude of the voltage/current on each phase with a fixed direction, and the purple dot represents the normalized space vector. As time goes on, the space vector follows the peak magnitude of the three phases.
 
 ### What is Field-Oriented Control
-Field-Oriented Control(FOC) is a method to mathematically force the current vector 
+Field-Oriented Control(FOC) is a method to mathematically force the current space vector to be 90 degrees ahead of the rotor angle. At a high level, the algorithm reads the currents on the three motor lines and turns it into a space vector, then it takes the space vectors direction, and subtracts the motor rotor angle from it. This is the normalized current space vector. This vector has two components: the quadrature current (y-axis) and the direct current (x-axis). The quadrature current is the component directly contributing to torque, and the direct current is the wasted current simply increasing flux. 
+
+For a brushless motor, a current space vector that is 90 degrees ahead of the rotor means that the coil 90 degrees ahead would be pulling, the coil at the location of the rotor would be off, and the coil 90 degrees behind would be pushing. This is the situation in which maximum torque is obtained, and it also corresponds to a quadrature current of 1. If on the other hand, the current is aligned with the rotor angle, then the coil aligned with the rotor would be pulling and the coils ahead and behind would be off. This zero torque situation corresponds to a direct current of 0.
+
+The goal of FOC is to use a PI controller to take the error between the desired current vector and actual current vector, and output the voltage space vector necessary to minimize that error. This voltage space vector is converted back into three phase voltages for the motor.
+
+### Vector Transforms
+A three phase system is converted into a space vector using the Clarke transform. It is
+
+$$
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{bmatrix}
+$$
+
+
