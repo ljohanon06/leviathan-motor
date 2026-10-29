@@ -35,7 +35,7 @@ module adc (
 			state <= idle;
 			phase_count <= 8'b0;
 			clk_out_set <= 1'b0;
-			cs <= 1'b0;
+			cs <= 1'b1;
 			adc <= 14'b0;
 		end
 		else begin 
@@ -46,7 +46,7 @@ module adc (
 				clk_out_set <= 1'b0;
 				done <= 1'b0;
 			end else if(state == converting_phase) begin //Data Conversion Phase, wait 1400ns
-				if(phase_count == 8'd139) begin
+				if(phase_count == 8'd140) begin
 					state <= d13;
 					cs <= 1'b0;
 					phase_count <= 8'b0;
