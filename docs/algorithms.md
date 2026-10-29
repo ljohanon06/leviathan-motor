@@ -73,6 +73,12 @@ Crucially, if the magnitude of the normalized vector space vector is greater tha
 ### PI Controller
 Work in Progress
 
+## Phase Voltage to PWM
+### Why PWM?
+When the three phase voltages are obtained, it isn't the simplest thing to actually send this voltage to the three motor lines. A normal DAC can't produce the current necessary for the motor, so the solution is to use a half-bridge controlled by PWM signals. The drain of the first MOSFET is attached to power, and the source of the second is attached to ground. The source of the first, the drain of the second, and the motor line are all tied together. By sending the a PWM, and an inverted version of that PWM, into the gates high and low side FETS, an average voltage is generated at the motor line input. Because what we truly care about is current, and the motor is quite inductive, then the rapidly switching voltage doesn't truly matter.
+
+### PWM Specifics
+
 ## Cordic Algorithm
 CORDIC, or COordinate Rotation DIgital Computer, is an algorithm that is used to iteratively calculate sine and cosine for an angle. Every clock cycle, roughly a bit of precision is gained on the output. The advantage of CORDIC is that its not necessary to do a large Maclaurin series polynomial or to have a huge lookup table. To start the algorithm, the first thing needed is the angle from the x-axis. For example, 200 degrees would be 20 degrees and 330 degrees would be 30 degrees. Just the closest angle to the x-axis. This angle then needs to be turned into a fixed bit 0.bx...b0 representation. 
 
@@ -103,8 +109,4 @@ $$
 $$
 
 In the final implementation with 12 steps, a small lookup table for the $\tan{(\tan^{-1}{2^{-i}})}$ is stored from i = 0 to 11, and the product of the cosines is pre-calculated to be 0x9B75 and is stored in the program. Then every clock cycle, the sums and shifts from the matrix multiplication is done outputting the cosine and sine values successfully.
-
-## Phase Voltage to PWM
-Work in Progress
-
 
