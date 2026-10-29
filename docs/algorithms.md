@@ -45,4 +45,24 @@ $$
 \end{equation}
 $$
 
+To rotate the space vector by the rotor angle, the Park transform is used. The park transform is simply a vector rotation by the rotor angle. 
+
+$$
+\begin{equation}
+    \begin{bmatrix}
+        I_d \\
+        I_q
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \cos{\theta} & \sin{\theta} \\
+        -\sin{\theta} & \cos{\theta}
+    \end{bmatrix}
+    \begin{bmatrix}
+        I_a \\
+        I_b
+    \end{bmatrix}
+\end{equation}
+$$
+
 
