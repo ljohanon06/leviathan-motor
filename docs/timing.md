@@ -15,5 +15,5 @@ The gate driver used is a DRV8300D. It takes 6 pwm signals: high and low for inp
 
 The output of the algorithm, done in voltage_normalizer.sv, returns the cycle count for which pwm is high. Cycle count low is equal to 1023-high. The voltage_normalizer algorithm also guarentees that the ADC will get at least 400ns to charge, not the full 600ns required. single_pwm.sv handles the actual pwm signal generation from these values, and triple_pwm handles the clock cycle count, and also tells the ADCs when to take measurements through a posedge signal. 
 
-## Overall Timing Information
+## Multicycle Modules
 Work in progress
