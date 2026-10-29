@@ -16,4 +16,15 @@ The gate driver used is a DRV8300D. It takes 6 pwm signals: high and low for inp
 The output of the algorithm, done in voltage_normalizer.sv, returns the cycle count for which pwm is high. Cycle count low is equal to 1023-high. The voltage_normalizer algorithm also guarentees that the ADC will get at least 400ns to charge, not the full 600ns required. single_pwm.sv handles the actual pwm signal generation from these values, and triple_pwm handles the clock cycle count, and also tells the ADCs when to take measurements through a posedge signal. 
 
 ## Multicycle Modules
-Work in progress
+### CRC
+The CRC (Cyclic Redundancy Checksum) is used to ensure no bits flipped during transmission. It is used by two different modules, the magnetic encoder which sends a 6-bit checksum over with its data transmission, and the monitor module for the FT232H. The magnetic encoder is only working at 15MHz, but it is next to the magnetic fields of the motor which could flip some bits. 
+
+Due to the long combinational logic paths in the CRC module, any modules using the CRC must give it an additional clock cycle or multiple at higher clock speeds. This must also be set in the SDC file as a multicycle path.
+
+### Forward and Inverse Transforms
+The forward and inverse transforms are what convert the line currents to the normalized current, and the normalized voltage back to the phase voltages. These wrap the normal and inverse, clarke and park transforms which do the individual vector transforms. Each of these modules take 2 clock cycles, so in total the forward and inverse transforms take four clock cycles each.
+
+### Cordic Algorithm
+The cordic algorithm is a way to convert an angle to a cosine and sine values for that angle. It iteratively takes the cosine and sine value and moves them towards the true value. Each clock cycle adds roughly a bit of precision. Since we have 12 usable bits from the magnetic encoder, we do 12 clock cycles for the magnetic encoder. This is done with the cordic_full module and it requires those 12 clock cycles to function properly. A signal **done** is set when the output is ready.
+
+
