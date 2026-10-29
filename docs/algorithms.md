@@ -10,7 +10,9 @@ Importantly, we send a voltage to the three lines, but the current through the c
 Finally, there is a difference between an electrical rotation and an actual rotation of the motor. For an electrical rotation, the voltage on the line starts at 0, rises to V+, drops to 0, drops to V-, then rises back up to 0, roughly following a sine wave. This represents a coil pulling a magnet on the rotor in, turning off when they're next to each other, then pushing it away once it passes. Each motor line undergoes two electrical rotations per mechanical rotation.
 
 ### Space Vectors
+A space vector is a way to represent a three phase power system as a 2d vector. By taking the magnitudes of the three voltages or currents, giving assign the vectors 0, 120, and 240 degree directions respectively, then summing them up, you get the space vector. This represents the overall magnitude and direction of the three phase power system at a given time. 
 
+![Space Vector GIF](media/Space_Vector.gif)
 
 ### What is Field-Oriented Control
 Field-Oriented Control(FOC) is a method to mathematically force the current vector 
