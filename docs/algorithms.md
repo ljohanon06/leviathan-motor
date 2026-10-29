@@ -74,3 +74,37 @@ Crucially, if the magnitude of the normalized vector space vector is greater tha
 Work in Progress
 
 ## Cordic Algorithm
+CORDIC, or COordinate Rotation DIgital Computer, is an algorithm that is used to iteratively calculate sine and cosine for an angle. Every clock cycle, roughly a bit of precision is gained on the output. The advantage of CORDIC is that its not necessary to do a large Maclaurin series polynomial or to have a huge lookup table. To start the algorithm, the first thing needed is the angle from the x-axis. For example, 200 degrees would be 20 degrees and 330 degrees would be 30 degrees. Just the closest angle to the x-axis. This angle then needs to be turned into a fixed bit 0.bx...b0 representation. 
+
+How the algorithm works, is it takes a starting angle of zero, along with the cos and sin of zero (1 and 0), and rotates it toward the input angle by a certain amount, then adds that certain amount to the starting angle. Every clock cycle, it takes this rotated angle value, compares it to the input angle, and rotates it towards the input angle by smaller and smaller values until the rotated angle converges on the input angle. The trick in CORDIC is proplerly choosing the angles the starting angle is rotated by.
+
+$$
+\begin{equation}
+    \begin{bmatrix} \cos{\theta} & \sin{\theta} \\\\ -\sin{\theta} & \cos{\theta} \end{bmatrix}
+    = \cos{\theta}
+    \begin{bmatrix} 1 & \tan{\theta} \\\\ -\tan{\theta} & 1 \end{bmatrix}
+    = \cos{\theta}
+    \begin{bmatrix} 1 & \tan{(\tan^{-1}{2^{-i}})} \\\\ -\tan{(\tan^{-1}{2^{-i}})} & 1 \end{bmatrix}
+\end{equation}
+$$
+
+Since multiplying by a negative power of two, such as $2^-1$ or $2^-7$ is simply a right shift, by choosing the angle to be the inverse tangent of negative powers of two, then the matrix multiplication simply turns into summing a number with a shifted version of another number. In the below algorithm, $\alpha$ is the input angle and $\theta_i = \pm \tan^{-1}{2^{-i}}$, with the sign depending on if the sum of the previous angles is less than or greater than $\alpha$. Finally, because cosine is an even function, the $\pm$ is cancelled out and can be pre-calculated as the starting cosine value. Because tangent is an odd function, $\tan{\pm \theta} = \pm \tan{\theta}$, then when summing the angle, only the positive angle needs to be stored in a lookup table.
+
+$$
+\begin{equation}
+    \begin{bmatrix} \cos{\alpha} \\\\ \sin{\alpha} \end{bmatrix}
+    = \left( \prod_{i=0}^{11} \cos{\theta_i} 
+    \begin{bmatrix} 1 & \tan{\theta_i} \\\\ -\tan{\theta_i} & 1 \end{bmatrix} \right)
+    \begin{bmatrix} 1 \\\\ 0 \end{bmatrix}
+    = \left( \prod_{i=0}^{11}
+    \begin{bmatrix} 1 & \tan{\theta_i} \\\\ -\tan{\theta_i} & 1 \end{bmatrix} \right)
+    \begin{bmatrix} \prod_{i=0}^{11} \cos{\theta_i} \\\\ 0 \end{bmatrix}
+\end{equation}
+$$
+
+In the final implementation with 12 steps, a small lookup table for the $\tan{(\tan^{-1}{2^{-i}})}$ is stored from i = 0 to 11, and the product of the cosines is pre-calculated to be 0x9B75 and is stored in the program. Then every clock cycle, the sums and shifts from the matrix multiplication is done outputting the cosine and sine values successfully.
+
+## Phase Voltage to PWM
+Work in Progress
+
+
