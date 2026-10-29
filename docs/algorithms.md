@@ -28,20 +28,10 @@ A three phase system is converted into a space vector using the Clarke transform
 
 $$
 \begin{equation} 
-    \begin{bmatrix}
-        I_a \\
-        I_b
-    \end{bmatrix} 
+    \begin{bmatrix} I_a \\\\ I_b \end{bmatrix} 
     = \frac{1}{\sqrt{3}}
-    \begin{bmatrix}
-        1 & -1/2 & -1/2 \\
-        0 & \sqrt{3} /2 & -\sqrt{3}/2 
-    \end{bmatrix}
-    \begin{bmatrix}
-        I_1 \\
-        I_2 \\
-        I_3
-    \end{bmatrix}
+    \begin{bmatrix} 1 & -1/2 & -1/2 \\\\ 0 & \sqrt{3} /2 & -\sqrt{3}/2 \end{bmatrix}
+    \begin{bmatrix} I_1 \\\\ I_2 \\\\ I_3 \end{bmatrix}
 \end{equation}
 $$
 
@@ -49,20 +39,38 @@ To rotate the space vector by the rotor angle, the Park transform is used. The p
 
 $$
 \begin{equation}
-    \begin{bmatrix}
-        I_d \\
-        I_q
-    \end{bmatrix}
+    \begin{bmatrix} I_d \\\\ I_q \end{bmatrix}
     =
-    \begin{bmatrix}
-        \cos{\theta} & \sin{\theta} \\
-        -\sin{\theta} & \cos{\theta}
-    \end{bmatrix}
-    \begin{bmatrix}
-        I_a \\
-        I_b
-    \end{bmatrix}
+    \begin{bmatrix} \cos{\theta} & \sin{\theta} \\\\ -\sin{\theta} & \cos{\theta} \end{bmatrix}
+    \begin{bmatrix} I_a \\\\ I_b \end{bmatrix}
 \end{equation}
 $$
 
+After the PI controller transforms the normalized current space vector into the necessary normalized voltage space vector, the inverse transforms of the two above are used. The first, the inverse Park transform, is very similar.
 
+$$
+\begin{equation}
+    \begin{bmatrix} V_a \\\\ v_b \end{bmatrix}
+    =
+    \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\\\ \sin{\theta} & \cos{\theta} \end{bmatrix}
+    \begin{bmatrix} V_d \\\\ V_q \end{bmatrix}
+\end{equation}
+$$
+
+Then the inverse Clarke transform is used to transform the space vector into the phase voltages for the three lines of the motors.
+
+$$
+\begin{equation} 
+    \begin{bmatrix} V_1 \\\\ V_2 \\\\ V_3 \end{bmatrix} 
+    = \sqrt{3}
+    \begin{bmatrix} 2/3 & 0 \\\\ -1/3 & 1/\sqrt{3} \\\\ -1/3 & -1/\sqrt{3} \\\\ \end{bmatrix}
+    \begin{bmatrix} V_a \\\\ V_b \end{bmatrix}
+\end{equation}
+$$
+
+Crucially, if the magnitude of the normalized vector space vector is greater than $\sqrt{3}/2$, there are some rotor angles for which there is no possible phase voltages to achieve that. This is due to the geometry of the motor and where the motor coils are physically located. This is considered for the output of the PI controller.
+
+### PI Controller
+Work in Progress
+
+## Cordic Algorithm
