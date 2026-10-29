@@ -24,7 +24,7 @@ For a brushless motor, a current space vector that is 90 degrees ahead of the ro
 The goal of FOC is to use a PI controller to take the error between the desired current vector and actual current vector, and output the voltage space vector necessary to minimize that error. This voltage space vector is converted back into three phase voltages for the motor.
 
 ### Vector Transforms
-A three phase system is converted into a space vector using the Clarke transform. It simply does some trig to get the x and y components of each vector and sum them up. Because the currents have to follow KCL, the maximum space vector magnitude is obtained when one current has magnitude one, and second has magnitude negative one. The magnitude of the space vector in this case is $\sqrt{3}$, which is the reason for the $1/sqrt{3}$ constant.
+A three phase system is converted into a space vector using the Clarke transform. It simply does some trig to get the x and y components of each vector and sum them up. Because the currents have to follow KCL, the maximum space vector magnitude is obtained when one current has magnitude one, and second has magnitude negative one. The magnitude of the space vector in this case is $\sqrt{3}$, which is the reason for the $1/\sqrt{3}$ constant.
 
 $$
 \begin{equation} 
