@@ -77,7 +77,17 @@ Work in Progress
 ### Why PWM?
 When the three phase voltages are obtained, it isn't the simplest thing to actually send this voltage to the three motor lines. A normal DAC can't produce the current necessary for the motor, so the solution is to use a half-bridge controlled by PWM signals. The drain of the first MOSFET is attached to power, and the source of the second is attached to ground. The source of the first, the drain of the second, and the motor line are all tied together. By sending the a PWM, and an inverted version of that PWM, into the gates high and low side FETS, an average voltage is generated at the motor line input. Because what we truly care about is current, and the motor is quite inductive, then the rapidly switching voltage doesn't truly matter.
 
+### Gate Driver
+MOSFETs require a large amount of gate current to turn all the way on, and also a relatively high voltage. This is more than the FPGA can provide. To solve this, a gate driver, which takes the PWM signal from the FPGA and amplifies it to go into the FETs is necessary.
+
 ### PWM Specifics
+As mentioned earlier, there are two inverted PWM signals, one for the high and low side FET. Lets say the high side FET has a 80% duty cycle, if this is the case, the low side FET would have a 20% duty cycle. At the start of a new PWM cycle, the low side PWM would be high and the high side PWM would be low. At the 20% mark, they would flip. The high side FET will be high for the rest of the time and the low side FET will be low for the rest of the time.
+
+If the high and low side FETs are on, or partially on, at the same time, your power supply will be shorted. Because of this, there is a 200ns deadtime between PWM edges. For our gate driver, the max PWM frequency is 200 kHz or 5000ns. Going back to the previous example at this frequency with the deadtime, for the first 200ns both PWMs are low. Then for the next 4600ns\*20%=920ns, the low side PWM is high, then for the next 200ns, both are low. Finally, for the last 4600ns\*90%=3680ns, the high side PWM is high.
+
+### FPGA Implementation
+The three phase voltages determined by FOC are first biased up, then stripped to their 10 most significant bits. Because the voltages are signed, flipping the sign bit makes it unsigned and biases it up. Then the 10 MSBs represent a value from 0 to 1023 for the PWM duty cycle. As mentioned in [timing.md](timing.md)
+
 
 ## Cordic Algorithm
 CORDIC, or COordinate Rotation DIgital Computer, is an algorithm that is used to iteratively calculate sine and cosine for an angle. Every clock cycle, roughly a bit of precision is gained on the output. The advantage of CORDIC is that its not necessary to do a large Maclaurin series polynomial or to have a huge lookup table. To start the algorithm, the first thing needed is the angle from the x-axis. For example, 200 degrees would be 20 degrees and 330 degrees would be 30 degrees. Just the closest angle to the x-axis. This angle then needs to be turned into a fixed bit 0.bx...b0 representation. 
