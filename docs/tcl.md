@@ -1,9 +1,7 @@
 # TCL Scripting
 
-Work in progress
-
 ## TCL Pin Compilation
-The TCL Pin Compilation script fully handles the pin assignments for the DE10-Lite. The file name is module_name_pins.tcl. For example, mag_enc_test_pins.tcl. In this file, every input and output port for the top module gets a pin assignment and is assigned a voltage standard. The output pins are assigned a current strength value and the input pins coming from outside the board get the PCI clamp diodes turned on for overvoltage protection. The is as follows.
+The TCL Pin Compilation script fully handles the pin assignments for the DE10-Lite. The file name is module_name_pins.tcl. For example, mag_enc_test_pins.tcl. In this file, every input and output port for the top module gets a pin assignment and is assigned a voltage standard. The output pins are assigned a current strength value and the input pins coming from outside the board get the PCI clamp diodes turned on for overvoltage protection. Everything is shown below.
 
 ```TCL
 # All pins get location and IO standard
@@ -58,8 +56,11 @@ derive_clock_uncertainty
 ```
 
 ## TCL Compilation Script
-For this project, every build will live in /build. Each testbench(_tb.sv) and hardware testbench(_test.sv), as well as the final product will be in its seperate directory. When compiling using the tcl script, a db and incremental_db directory is created, as well as some other folders. 
+For this project, every build will live in /build. Each testbench(_tb.sv) and hardware testbench(_test.sv), as well as the final product will be in its seperate directory. This build directory is on the gitignore. The first thing that happens is the necessary packages are loaded to deal with the project and for compilation, project and flow, are loaded.
 
-The project is referenced by the project_path variable, if this is /build/p_name/p_name, then the Quartus Project file(qpf) and Quartus Settings file(qsf) will be in /build/p_name/p_name.qpf.
+Then to start, a few variables are declared. The top_level_module and project_name, which should ideally be the same, are set. All file names are set off of the project name, such as "$project_name.sdc" and so on. From these, the build directory and project paths are created, then the project is created and opened. After this, there is three main steps: creating the global attributes and ignoring some warnings, adding all necessary files, and finally compiling everything. 
+
+Overall, the TCL script is pretty unique here in that only the only thing necessary to change between scripts is the project_name. 
 
 ## Do Scripts (Questa)
+The .do scripts are the scripts necessary to simulate in Questa.
