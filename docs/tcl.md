@@ -60,7 +60,11 @@ For this project, every build will live in /build. Each testbench(_tb.sv) and ha
 
 Then to start, a few variables are declared. The top_level_module and project_name, which should ideally be the same, are set. All file names are set off of the project name, such as "$project_name.sdc" and so on. From these, the build directory and project paths are created, then the project is created and opened. After this, there is three main steps: creating the global attributes and ignoring some warnings, adding all necessary files, and finally compiling everything. 
 
-Overall, the TCL script is pretty unique here in that only the only thing necessary to change between scripts is the project_name. 
+Overall, the TCL script is pretty unique here in that only the only thing necessary to change between scripts is the project_name. The script run command is shown below.
+
+```bash
+quartus_sh -t scripts/module_name.tcl
+```
 
 ## Do Scripts (Questa)
 The .do scripts are the scripts necessary to simulate in Questa.
