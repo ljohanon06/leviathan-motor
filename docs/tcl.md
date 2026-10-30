@@ -20,7 +20,42 @@ set_instance_assignment -name PCI_IO ON -to {input_pin}
 ```
 
 ## SDC File
-The SDC file is the most central
+The SDC file controls the timing for every build and allow the timing analyzer to truly function. The first step is to tell the timing analyzer about the clocks in the design with the create_clock command, and also tell it to automatically run the command for the PLL clocks. get_ports is used any ports specifically going in and out of the top level module.
+
+```TCL
+# Create clocks and pll clocks
+create_clock -name clk_50 -period 20.000 [get_ports clk_50]
+derive_pll_clocks
+```
+The next step is that the clocks need to be declared asynchronous. This is so the timing analyzer doesn't try and analyze any paths between different clock domains. The same is done for the asynchronous reset. Also, the reset is lifted with a reset synchronizer.
+
+```TCL
+# Declare clocks asynchronous
+set_clock_groups -asynchronous \
+	-group [get_clocks {clk_50}] \
+	-group [get_clocks {pll_inst|altpll_component|auto_generated|pll1|clk[0]}]
+
+# Handle async reset
+set_false_path -from [get_ports reset]
+```
+Any generated clocks, such as the clock sent to the ADC and the magnetic encoder, or internal clocks created, needs to be declared. Also, for any external pins, the input and output delays need to be set. The input delay is the time after a clock edge that an input to the FPGA will be ready. The output delay is the setup time that an external device needs on an FPGA output. Also, get_pins is for the ports of internal modules.
+
+```TCL
+# Create any generated clock, set input output delays
+create_generated_clock -name adc_clk1 -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] [get_ports adc_clk1]
+set_input_delay -clock adc_clk1 -clock_fall -max 10 [get_ports sdo1]
+set_input_delay -clock adc_clk1 -clock_fall -min 0.5 [get_ports sdo1]
+```
+Any multicycle paths in the logic need to be declared. There is two settings that can be declared, the setup and the hold path. The setup time is the time output needs to be held stable before the next clock edge, and the setup path tells the timing analysis how many clock edges this takes to happen. Similarly, the hold time is the an input needs to be stable after the clock edge, and a multicycle hold path tells the timing analyzer what clock edge to to an earlier clock cycle for the input. Finally, derive_clock_uncertainty tells the timing analyzer to handle any other details.
+
+```TCL
+# CRC is a multicycle path
+set_multicycle_path -setup -from [get_cells {me|checksum|*}] -to [get_cells {me|checksum|*}] 2
+set_multicycle_path -hold -from [get_cells {me|checksum|*}] -to [get_cells {me|checksum|*}] 1
+
+# Derive clock uncertainty
+derive_clock_uncertainty
+```
 
 ## TCL Compilation Script
 For this project, every build will live in /build. Each testbench(_tb.sv) and hardware testbench(_test.sv), as well as the final product will be in its seperate directory. When compiling using the tcl script, a db and incremental_db directory is created, as well as some other folders. 
