@@ -8,21 +8,23 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module single_pwm (
-	input [10:0] pwm_count,
-	input [9:0] pwm_high_count,
-	input [9:0] pwm_low_count,
+module #(
+	parameter MULT = 1,
+	parameter HALF = 0) single_pwm (
+	input [MULT+10:0] pwm_count,
+	input [MULT+10:0] pwm_high_count,
+	input [MULT+10:0] pwm_low_count,
 	output logic pwm_high,
 	output logic pwm_low);
 	
 	always_comb begin
-		if(pwm_count < 11'd45) begin
+		if(pwm_count < (11+MULT)'('d45)) begin
 			pwm_high <= 1'b0;
 			pwm_low <= 1'b0;
-		end else if(pwm_count < (11'd45 + pwm_low_count)) begin
+		end else if(pwm_count < (11+MULT)'('d45) + pwm_low_count)) begin
 			pwm_high <= 1'b0;
 			pwm_low <= 1'b1;
-		end else if(pwm_count < (11'd90 + pwm_low_count)) begin
+		end else if(pwm_count < (11+MULT)'('d90) + pwm_low_count)) begin
 			pwm_high <= 1'b0;
 			pwm_low <= 1'b0;
 		end else begin

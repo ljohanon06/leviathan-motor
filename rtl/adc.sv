@@ -8,62 +8,90 @@
  * See the LICENSE file in the project root for full license information.
  */
 
+/*
+Timing information:
+
+cs behavior:
+cs is idle low
+On rising edge of CS, cap is locked into ADC
+1400ns CS high-Data conversion phase
+CS Falling edge, data can be clocked out
+
+sclk behavior:
+sclk idle low
+first rising edge is after cs goes low
+data is clocked out of adc at falling edge
+
+sdo behavior:
+idle high, read on rising edge
+
+CS-Pulldown
+SCLK-Pulldown
+SDI-Pullup
+SDO-Pullup
+*/
+
 module adc (
-	input clk, //100MHz
+	input clk, //50MHz
 	input reset,
 	input start,
-	input sdo, //pullup, sdi pullup
-	output clk_out, //pullup
-	output cs, //pulldown
+	input sdo,
+	output clk_out, 
+	output cs, 
 	output logic [13:0] adc,
 	output done);
 	
 	
-	typedef enum logic [4:0] {
-		idle, converting_phase, d13, d12,
-		d11, d10, d9, d8, d7, d6,
-		d5, d4, d3, d2, d1, d0, quiet_phase} adc_state_t;
+	typedef enum logic [4:0] {idle, converting_phase, d[13:0], quiet_phase} adc_state_t;
 		
 	adc_state_t state;
-	logic [7:0] phase_count; 
+	logic [6:0] phase_count;  //70 clock cycles = 1400ns
 	logic clk_out_set;
 	
-	assign clk_out = clk & clk_out_set;
+	assign clk_out = (clk & clk_out_set) ? 1'b1 : 1'bz;
+	
+	logic start_reg;
 	
 	always_ff @(posedge clk or negedge reset) begin
 		if(~reset) begin //Reset logic
 			state <= idle;
-			phase_count <= 8'b0;
+			phase_count <= 7'b0;
 			clk_out_set <= 1'b0;
-			cs <= 1'b1;
+			cs <= 1'b0;
 			adc <= 14'b0;
+			start_reg <= 1'b0;
 		end
 		else begin 
-			if(start && state == idle) begin //Idle state
+			start_reg <= start;
+			if(start && ~start_reg && state == idle) begin //Idle state
 				state <= converting_phase;
 				cs <= 1'b1;
-				phase_count <= 8'b0;
+				phase_count <= 7'b0;
 				clk_out_set <= 1'b0;
 				done <= 1'b0;
 			end else if(state == converting_phase) begin //Data Conversion Phase, wait 1400ns
-				if(phase_count == 8'd140) begin
+				if(phase_count == 7'd70) begin
 					state <= d13;
 					cs <= 1'b0;
-					phase_count <= 8'b0;
-					clk_out_set <= 1'b1;
+					phase_count <= 7'b0;
+					clk_out_set <= 1'b0;
 				end else begin
-					phase_count <= phase_count + 5'b1;
+					phase_count <= phase_count + 7'b1;
 				end
 			end else if(state >= 5'd2 && state <= 5'd15) begin //Data shift out
+				clk_out_set <= 1'b1;
 				state <= adc_state_t'(state + 5'b1);
 				adc <= {adc[12:0],sdo};
 			end else if(state == quiet_phase) begin //Quiet Phase
 				done <= 1'b1;
 				clk_out_set <= 1'b0;
-				if(phase_count == 8'd5)
+				if(phase_count == 7'd5)
 					state <= idle;
-				else phase_count <= phase_count + 8'b1;
-			end			
+				else phase_count <= phase_count + 7'b1;
+			end	else begin
+				cs <= 1'b0;
+				clk_out_set <= 1'b0;
+			end
 		end
 	end
 	

@@ -112,8 +112,6 @@ set_instance_assignment	-name	CURRENT_STRENGTH_NEW	8MA	-to	{mg[2]	}
 set_instance_assignment	-name	CURRENT_STRENGTH_NEW	8MA	-to	{mg[3]	}
 set_instance_assignment	-name	CURRENT_STRENGTH_NEW	8MA	-to	{mg[0]	}
 
-set_instance_assignment -name PCI_IO ON -to reset
-set_instance_assignment -name PCI_IO ON -to clk_50
 set_instance_assignment -name PCI_IO ON -to d_in
 
 # This will always be at ground

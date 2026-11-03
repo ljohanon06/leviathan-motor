@@ -31,6 +31,10 @@ set_global_assignment -name NUM_PARALLEL_PROCESSORS 16
 # Ignore LogicLock warning
 set_global_assignment -name MESSAGE_DISABLE 292013
 
+# Suppress AN 447 informational warning on 3.3V inputs
+set_global_assignment -name MESSAGE_DISABLE 169177
+set_global_assignment -name MESSAGE_DISABLE 169178
+
 # Add Project Source Files
 set rtl_files [glob -nocomplain ../../rtl/*.sv]
 
