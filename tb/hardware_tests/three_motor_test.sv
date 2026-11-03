@@ -8,7 +8,7 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module motor_test(
+module single_motor_test(
 	input on_switch,
 	input [2:0] voltage,
 	input clk_50,
