@@ -12,7 +12,7 @@ module speedometer (
 	input clk_100,
 	input reset,
 	input [3:0] angle_reg,
-	output [15:0] speed_hz);
+	output logic [15:0] speed_hz);
 	
 	logic [15:0] distance;
 	logic [22:0] count;

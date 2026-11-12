@@ -16,11 +16,11 @@ module magnetic_encoder #(
 	input reset,
 	input enable,
 	input d_in,
-	output csn,
-	output clk_out,
-	output done,
-	output [13:0] angle_out,
-	output [23:0] raw_data);
+	output logic csn,
+	output logic clk_out,
+	output logic done,
+	output logic [13:0] angle_out,
+	output logic [23:0] raw_data);
 	
 	typedef enum logic [4:0] {
 		idle, CSN_low, CLK_start, d[13:0],

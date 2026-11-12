@@ -21,7 +21,7 @@ module global_clock_reset(
 		.reset_sync(reset_arr[3]));
 
 	pll pll_inst (
-		.reset (~reset_50), //Reset is asynchronous
+		.reset (~reset_arr[3]), //Reset is asynchronous
 		.clk_in (clk_50),
 		.c0 (clk_arr[2]),
 		.c1 (clk_arr[1]),

@@ -35,6 +35,9 @@ set_global_assignment -name MESSAGE_DISABLE 292013
 set_global_assignment -name MESSAGE_DISABLE 169177
 set_global_assignment -name MESSAGE_DISABLE 169178
 
+# Supress optimized away node message
+set_global_assignment -name MESSAGE_DISABLE 14320
+
 # Add Project Source Files
 set rtl_files [glob -nocomplain ../../rtl/*.sv]
 
@@ -48,7 +51,7 @@ puts "Added Source Files"
 # Other Project Files
 source "../../constraints/${top_level_entity}_pins.tcl"
 puts "Added Pin Assignments"
-# set_global_assignment -name SDC_FILE "../../constraints/${project_name}.sdc"
+set_global_assignment -name SDC_FILE "../../constraints/${project_name}.sdc"
 puts "Added SDC file"
 
 export_assignments

@@ -8,9 +8,9 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module #(
+module single_pwm #(
 	parameter MULT = 1,
-	parameter HALF = 0) single_pwm (
+	parameter HALF = 0) (
 	input [MULT+10:0] pwm_count,
 	input [MULT+10:0] pwm_high_count,
 	input [MULT+10:0] pwm_low_count,
@@ -21,10 +21,10 @@ module #(
 		if(pwm_count < (11+MULT)'('d45)) begin
 			pwm_high <= 1'b0;
 			pwm_low <= 1'b0;
-		end else if(pwm_count < (11+MULT)'('d45) + pwm_low_count)) begin
+		end else if(pwm_count < ((11+MULT)'('d45) + pwm_low_count)) begin
 			pwm_high <= 1'b0;
 			pwm_low <= 1'b1;
-		end else if(pwm_count < (11+MULT)'('d90) + pwm_low_count)) begin
+		end else if(pwm_count < ((11+MULT)'('d90) + pwm_low_count)) begin
 			pwm_high <= 1'b0;
 			pwm_low <= 1'b0;
 		end else begin

@@ -8,40 +8,40 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module #(
+module single_motor #(
 	parameter MULT = 1,
-	parameter HALF = 0) single_motor (
+	parameter HALF = 0) (
 	input [3:0] clk_arr, //50, 100, 222, 15
 	input [3:0] reset_arr,
 	input enable,
 	input [17:0] vd, vq,
 	input vdq_ready,
 	input [MULT+10:0] pwm_count,
-	output [17:0] id, iq,
-	output idq_ready, 
-	output [5:0] pwm_out,
+	output logic [17:0] id, iq,
+	output logic idq_ready, 
+	output logic [5:0] pwm_out,
 	input sdo1, //ADC Inputs and Outputs
 	input sdo2,
-	output adc_clk1,
-	output adc_clk2,
-	output cs1,
-	output cs2,
+	output logic adc_clk1,
+	output logic adc_clk2,
+	output logic cs1,
+	output logic cs2,
 	input d_in, //Magnetic Encoder Inputs and Outputs
-	output mag_clk_out,
-	output csn,
-	output [13:0] mag_reg, //Output signals for monitor
-	output [13:0] adc1_reg, adc2_reg,
-	output sensor_done); 
+	output logic mag_clk_out,
+	output logic csn,
+	output logic [13:0] mag_reg, //Output signals for monitor
+	output logic [13:0] adc1_reg, adc2_reg,
+	output logic sensor_done); 
 	
 	//PWM voltage ready
 	logic v_valid;
-	always v_valid = pwm_count > 10'd950 & pwm_count < 10'd1024;
+	always v_valid = pwm_count > (10+MULT)'('d950) & pwm_count < (10+MULT)'('d1024);
 	
 	//Start magnetic encoder at the beginning
 	logic mag_enable, me1, me2;
 	always me1 = pwm_count < 10'd64;
 	always_ff @(posedge clk_arr[0] or negedge reset_arr[0]) begin
-		if(~reset_arr[2]) begin
+		if(~reset_arr[0]) begin
 			me2 <= 1'b0;
 			mag_enable <= 1'b0;
 		end else begin
@@ -52,7 +52,7 @@ module #(
 	
 	//The current from ADC and foward transform is ready at this time
 	logic idq_f1, idq_ready_222;
-	always idq_ready_222 = pwm_count >= 10'd640 && pwm_count <= 10'd647;
+	always idq_ready_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d647);
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
 			idq_ready <= 1'b0;
@@ -65,7 +65,7 @@ module #(
 	
 	//The raw sensor data is ready at this time
 	logic sd_f1, sensor_done_222;
-	always idq_ready_222 = pwm_count >= 10'd640 && pwm_count <= 10'd647;
+	always sensor_done_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d647);
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
 			sensor_done <= 1'b0;
@@ -95,6 +95,9 @@ module #(
 	
 	
 	logic adc_meas1, adc_meas2;
+	logic [13:0] adc1_raw, adc2_raw, mag_raw;
+	logic adc_done_1, adc_done_2, me_done;
+	logic a1d_1, a1d_2, a2d_1, a2d_2, med_1, med_2;
 	
 	//PWM Signal
 	logic [17:0] v1, v2, v3;
@@ -153,8 +156,6 @@ module #(
 		.iq(iq));
 		
 	//Sensor Clock Domain Crossing using 2-flip flop handshake on done signal
-	logic a1d_1, a1d_2, a2d_1, a2d_2, med_1, med_2;
-	
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin //100MHz
 		if(~reset_arr[2]) begin
 			adc1_reg <= 14'b0;
@@ -197,7 +198,7 @@ module #(
 	//ADC start measurement clock domain crossing
 	logic meas1_1, meas1_2, meas2_1, meas2_2;
 	always_ff @(posedge clk_arr[3] or negedge reset_arr[3]) begin //50MHz
-		if(~reset_arr[2]) begin
+		if(~reset_arr[3]) begin
 			meas1_1 <= 1'b0;
 			meas1_2 <= 1'b0;
 			meas2_1 <= 1'b0;
@@ -211,14 +212,11 @@ module #(
 	end
 			
 		
-	//Sensors
-	logic [13:0] adc1_raw, adc2_raw, mag_raw;
-	logic adc_done_1, adc_done_2, me_done;
-	
+	//Sensors	
 	adc adc_1 (
 		.clk(clk_arr[3]), //50 MHz
 		.reset(reset_arr[3]),
-		.start(meas1_1),
+		.start(meas1_2),
 		.sdo(sdo1),
 		.clk_out(adc_clk1),
 		.cs(cs1),
@@ -228,7 +226,7 @@ module #(
 	adc adc_2 (
 		.clk(clk_arr[3]),
 		.reset(reset_arr[3]),
-		.start(meas2_1),
+		.start(meas2_2),
 		.sdo(sdo2),
 		.clk_out(adc_clk2),
 		.cs(cs2),

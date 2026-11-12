@@ -34,8 +34,8 @@ module single_motor_test(
 	logic [3:0] clk_arr, reset_arr; //clk 50, 100, 222, 15	
 	
 	global_clock_reset gcr (
-		.clk_50(clk[3]),
-		.reset(reset)
+		.clk_50(clk_50),
+		.reset(reset),
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr));
 	
@@ -46,7 +46,7 @@ module single_motor_test(
 	logic [17:0] id, iq, vd, vq;
 	logic vdq_ready, idq_ready;
 	
-	assign vd <= 18'b0;
+	assign vd = 18'b0;
 	
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
@@ -104,7 +104,7 @@ module single_motor_test(
 	monitor #(.N(7)) mon (
 		.clk(clk_arr[2]),
 		.reset(reset_arr[2]),
-		.data_input({cycle_count,2'b0,mag_reg,5'b0,voltage_reg}),
+		.data_input({cycle_count,2'b0,mag_reg,5'b0,voltage}),
 		.data_write(sensor_done && (cycle_count[2:0] == 3'b0)), //Write every 8 cycles
 		.ft232_clk(ft232_clk),
 		.txe(txe),
@@ -114,9 +114,9 @@ module single_motor_test(
 		
 	logic [15:0] speed_hz;
 	speedometer speed (
-		.clk_100(clk_100),
-		.reset(reset_100),
-		.angle_reg(angle_reg[13:10]),
+		.clk_100(clk_arr[2]),
+		.reset(reset_arr[2]),
+		.angle_reg(mag_reg[13:10]),
 		.speed_hz(speed_hz));
 
 	single_ssd s1 (

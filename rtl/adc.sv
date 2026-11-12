@@ -31,24 +31,24 @@ SDI-Pullup
 SDO-Pullup
 */
 
-module adc (
+module adc #(
+	parameter CYCLES = 2) ( //2 to 8
 	input clk, //50MHz
 	input reset,
 	input start,
 	input sdo,
-	output clk_out, 
-	output cs, 
+	output logic clk_out, 
+	output logic cs, 
 	output logic [13:0] adc,
-	output done);
+	output logic done);
+	
+	localparam CLOW = CYCLES / 2;
 	
 	
 	typedef enum logic [4:0] {idle, converting_phase, d[13:0], quiet_phase} adc_state_t;
 		
 	adc_state_t state;
 	logic [6:0] phase_count;  //70 clock cycles = 1400ns
-	logic clk_out_set;
-	
-	assign clk_out = (clk & clk_out_set) ? 1'b1 : 1'bz;
 	
 	logic start_reg;
 	
@@ -56,10 +56,10 @@ module adc (
 		if(~reset) begin //Reset logic
 			state <= idle;
 			phase_count <= 7'b0;
-			clk_out_set <= 1'b0;
 			cs <= 1'b0;
 			adc <= 14'b0;
 			start_reg <= 1'b0;
+			clk_out <= 1'b0;
 		end
 		else begin 
 			start_reg <= start;
@@ -67,30 +67,35 @@ module adc (
 				state <= converting_phase;
 				cs <= 1'b1;
 				phase_count <= 7'b0;
-				clk_out_set <= 1'b0;
+				clk_out <= 1'b0;
 				done <= 1'b0;
 			end else if(state == converting_phase) begin //Data Conversion Phase, wait 1400ns
 				if(phase_count == 7'd70) begin
 					state <= d13;
 					cs <= 1'b0;
 					phase_count <= 7'b0;
-					clk_out_set <= 1'b0;
+					clk_out <= 1'b0;
 				end else begin
 					phase_count <= phase_count + 7'b1;
 				end
 			end else if(state >= 5'd2 && state <= 5'd15) begin //Data shift out
-				clk_out_set <= 1'b1;
-				state <= adc_state_t'(state + 5'b1);
-				adc <= {adc[12:0],sdo};
+				phase_count <= phase_count + 7'b1;
+				if(phase_count % CYCLES == CLOW) begin
+					clk_out <= 1'b1;
+					adc <= {adc[12:0],sdo};
+				end else if(phase_count % CYCLES == 0 && phase_count != 7'b0)begin
+					clk_out <= 1'b0;
+					state <= adc_state_t'(state + 5'b1);	
+				end			
 			end else if(state == quiet_phase) begin //Quiet Phase
 				done <= 1'b1;
-				clk_out_set <= 1'b0;
+				clk_out <= 1'b0;
 				if(phase_count == 7'd5)
 					state <= idle;
 				else phase_count <= phase_count + 7'b1;
 			end	else begin
 				cs <= 1'b0;
-				clk_out_set <= 1'b0;
+				clk_out <= 1'b0;
 			end
 		end
 	end

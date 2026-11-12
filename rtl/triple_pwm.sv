@@ -9,9 +9,9 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module #(
+module triple_pwm #(
 	parameter MULT = 1,
-	parameter HALF = 0) triple_pwm (
+	parameter HALF = 0) (
 	input clk_222,  
 	input reset_222,
 	input v_valid,

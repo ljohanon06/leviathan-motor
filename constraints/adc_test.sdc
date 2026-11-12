@@ -2,13 +2,9 @@
 create_clock -name clk_50 -period 20.000 [get_ports clk_50]
 derive_pll_clocks
 
-set_clock_groups -asynchronous \
-	-group [get_clocks {clk_50}] \
-	-group [get_clocks {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] 
-
 
 # ADC Requirements
-create_generated_clock -name adc_clk -source [get_pins {pll_inst|altpll_component|auto_generated|pll1|clk[0]}] [get_ports adc_clk]
+create_generated_clock -name adc_clk -source clk_50 [get_ports adc_clk]
 set_input_delay -clock adc_clk -max 3.5 [get_ports sdo]
 set_input_delay -clock adc_clk -min 0.5 [get_ports sdo]
 

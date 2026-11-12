@@ -8,9 +8,9 @@
  * See the LICENSE file in the project root for full license information.
  */
 
-module #(
+module pwm_timing #(
 	parameter MULT = 1,
-	parameter HALF = 0) pwm_timing (
+	parameter HALF = 0) (
 	input clk_222,
 	input reset_222,
 	input enable,
@@ -24,7 +24,7 @@ module #(
 	logic b_on, c_on;
 	
 	always_ff @(posedge clk_222 or negedge reset_222) begin
-		if(~reset) begin
+		if(~reset_222) begin
 			cycle_count <= 32'b0;
 			pwm_a <= 'b0;
 			pwm_b <= 'b0;
@@ -52,6 +52,7 @@ module #(
 				b_on <= 1'b1;
 			if(pwm_a == C_RE)
 				c_on <= 1'b1;	
+		end
 	end
 endmodule
 /*
