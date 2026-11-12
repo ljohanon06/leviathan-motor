@@ -33,282 +33,282 @@
 # Modifying modelsim.ini
 # 
 # set rtl_files [glob -nocomplain "$rtl_dir/*.sv"]
-# ../../rtl/current_normalizer.sv ../../rtl/current_adder.sv ../../rtl/angle_normalizer.sv ../../rtl/clarke_transform.sv ../../rtl/cordic.sv ../../rtl/cordic_full.sv ../../rtl/fifo_ft232h.sv ../../rtl/forward_transform.sv ../../rtl/park_transform.sv ../../rtl/single_ssd.sv ../../rtl/two_to_sign.sv ../../rtl/pll.sv ../../rtl/monitor.sv ../../rtl/crc.sv ../../rtl/fifo_ft232h_cdc.sv ../../rtl/triple_pwm.sv ../../rtl/single_pwm.sv ../../rtl/global_clock_reset.sv ../../rtl/pwm_timing.sv ../../rtl/voltage_normalizer.sv ../../rtl/reset_sync.sv ../../rtl/inverse_transform.sv ../../rtl/inverse_clarke.sv ../../rtl/inverse_park.sv ../../rtl/speedometer.sv ../../rtl/magnetic_encoder.sv ../../rtl/adc_measurement.sv ../../rtl/single_motor.sv ../../rtl/adc.sv ../../rtl/uart_transmitter.sv ../../rtl/uart_wrapper.sv ../../rtl/uart_receiver.sv ../../rtl/servo_driver.sv
+# ../../rtl/current_normalizer.sv ../../rtl/current_adder.sv ../../rtl/angle_normalizer.sv ../../rtl/clarke_transform.sv ../../rtl/cordic.sv ../../rtl/cordic_full.sv ../../rtl/fifo_ft232h.sv ../../rtl/forward_transform.sv ../../rtl/park_transform.sv ../../rtl/single_ssd.sv ../../rtl/two_to_sign.sv ../../rtl/pll.sv ../../rtl/monitor.sv ../../rtl/crc.sv ../../rtl/fifo_ft232h_cdc.sv ../../rtl/triple_pwm.sv ../../rtl/single_pwm.sv ../../rtl/global_clock_reset.sv ../../rtl/pwm_timing.sv ../../rtl/voltage_normalizer.sv ../../rtl/reset_sync.sv ../../rtl/inverse_transform.sv ../../rtl/inverse_clarke.sv ../../rtl/inverse_park.sv ../../rtl/speedometer.sv ../../rtl/magnetic_encoder.sv ../../rtl/adc_measurement.sv ../../rtl/single_motor.sv ../../rtl/adc.sv ../../rtl/uart_transmitter.sv ../../rtl/uart_wrapper.sv ../../rtl/uart_receiver.sv ../../rtl/servo_driver.sv ../../rtl/countones.sv
 # foreach file $rtl_files {
 # 	vlog -sv -work work "$file"
 # }
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:54 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/current_normalizer.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module current_normalizer
 # 
 # Top level modules:
 # 	current_normalizer
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:54 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:54 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/current_adder.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module current_adder
 # 
 # Top level modules:
 # 	current_adder
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:54 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:54 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/angle_normalizer.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module angle_normalizer
 # 
 # Top level modules:
 # 	angle_normalizer
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:54 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:54 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/clarke_transform.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module clarke_transform
 # 
 # Top level modules:
 # 	clarke_transform
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/cordic.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module cordic
 # 
 # Top level modules:
 # 	cordic
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/cordic_full.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module cordic_full
 # 
 # Top level modules:
 # 	cordic_full
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/fifo_ft232h.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module fifo_ft232h
 # 
 # Top level modules:
 # 	fifo_ft232h
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/forward_transform.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module forward_transform
 # 
 # Top level modules:
 # 	forward_transform
-# End time: 17:40:07 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:07 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/park_transform.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module park_transform
 # 
 # Top level modules:
 # 	park_transform
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:01
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/single_ssd.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module single_ssd
 # 
 # Top level modules:
 # 	single_ssd
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/two_to_sign.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module two_to_sign
 # 
 # Top level modules:
 # 	two_to_sign
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/pll.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module pll
 # 
 # Top level modules:
 # 	pll
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/monitor.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module monitor
 # 
 # Top level modules:
 # 	monitor
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/crc.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module crc
 # 
 # Top level modules:
 # 	crc
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/fifo_ft232h_cdc.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module fifo_ft232h_cdc
 # 
 # Top level modules:
 # 	fifo_ft232h_cdc
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/triple_pwm.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module triple_pwm
 # 
 # Top level modules:
 # 	triple_pwm
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:55 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:55 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/single_pwm.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module single_pwm
 # 
 # Top level modules:
 # 	single_pwm
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/global_clock_reset.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module global_clock_reset
 # 
 # Top level modules:
 # 	global_clock_reset
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/pwm_timing.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module pwm_timing
 # 
 # Top level modules:
 # 	pwm_timing
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/voltage_normalizer.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module voltage_normalizer
 # 
 # Top level modules:
 # 	voltage_normalizer
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/reset_sync.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module reset_sync
 # 
 # Top level modules:
 # 	reset_sync
-# End time: 17:40:08 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:08 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/inverse_transform.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module inverse_transform
 # 
 # Top level modules:
 # 	inverse_transform
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:01
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/inverse_clarke.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module inverse_clarke
 # 
 # Top level modules:
 # 	inverse_clarke
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/inverse_park.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module inverse_park
 # 
 # Top level modules:
 # 	inverse_park
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/speedometer.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module speedometer
 # 
 # Top level modules:
 # 	speedometer
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/magnetic_encoder.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module magnetic_encoder
 # 
 # Top level modules:
 # 	magnetic_encoder
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/adc_measurement.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module adc_measurement
 # 
 # Top level modules:
 # 	adc_measurement
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/single_motor.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module single_motor
@@ -319,84 +319,93 @@
 # 
 # Top level modules:
 # 	single_motor
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 4
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/adc.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module adc
 # 
 # Top level modules:
 # 	adc
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:56 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:56 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/uart_transmitter.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module uart_transmitter
 # 
 # Top level modules:
 # 	uart_transmitter
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:57 on Nov 11,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:57 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/uart_wrapper.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module uart_wrapper
 # 
 # Top level modules:
 # 	uart_wrapper
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:57 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:57 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/uart_receiver.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module uart_receiver
 # 
 # Top level modules:
 # 	uart_receiver
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:57 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:57 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../rtl/servo_driver.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module servo_driver
 # 
 # Top level modules:
 # 	servo_driver
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:57 on Nov 11,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 19:26:57 on Nov 11,2026
+# vlog -reportprogress 300 -sv -work work ../../rtl/countones.sv 
+# ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
+# -- Compiling module countones
+# 
+# Top level modules:
+# 	countones
+# End time: 19:26:57 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vlog -sv -work work "$tb_dir/$project_name.sv"
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:57 on Nov 11,2026
 # vlog -reportprogress 300 -sv -work work ../../tb/servo_driver_tb.sv 
 # ** Note: (vlog-220) 'modelsim.ini' is used as the ini file.
 # -- Compiling module servo_driver_tb
 # 
 # Top level modules:
 # 	servo_driver_tb
-# End time: 17:40:09 on Nov 11,2026, Elapsed time: 0:00:00
+# End time: 19:26:57 on Nov 11,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vsim -t 10ps -L lpm_ver -L work -voptargs="+acc" "$project_name"
 # ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
 # vsim -t 10ps -L lpm_ver -L work -voptargs=""+acc"" servo_driver_tb 
-# Start time: 17:40:09 on Nov 11,2026
+# Start time: 19:26:57 on Nov 11,2026
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
 # ** Note: (vopt-220) 'modelsim.ini' is used as the ini file.
-# ** Warning: ../../tb/servo_driver_tb.sv(19): (vopt-2685) [TFMPC] - Too few port connections for 'sd'.  Expected 12, found 11.
-# ** Warning: ../../tb/servo_driver_tb.sv(19): (vopt-2718) [TFMPC] - Missing connection for port 'center'.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # Loading sv_std.std
 # Loading work.servo_driver_tb(fast)
 # Loading work.servo_driver(fast)
+# Loading work.countones(fast)
 # 
 # add wave *
 # add wave /servo_driver_tb/sd/*
@@ -405,9 +414,9 @@
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-# ** Note: $stop    : ../../tb/servo_driver_tb.sv(60)
+# ** Note: $stop    : ../../tb/servo_driver_tb.sv(78)
 #    Time: 120000014850 ps  Iteration: 0  Instance: /servo_driver_tb
-# Break in Module servo_driver_tb at ../../tb/servo_driver_tb.sv line 60
+# Break in Module servo_driver_tb at ../../tb/servo_driver_tb.sv line 78
 # Causality operation skipped due to absence of debug database file
-# End time: 18:08:41 on Nov 11,2026, Elapsed time: 0:28:32
-# Errors: 0, Warnings: 3
+# End time: 19:56:07 on Nov 11,2026, Elapsed time: 0:29:10
+# Errors: 0, Warnings: 1

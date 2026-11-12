@@ -8,14 +8,15 @@
  * See the LICENSE file in the project root for full license information.
  */
 
+//red, blue, black
 module servo_driver #(
-	parameter logic [20:0] A_LOW = 21'd50505, B_LOW = 21'd50505, C_LOW = 21'd50505,
-	parameter logic [8:0] A_BIAS = 9'd345, B_BIAS = 9'd374, C_BIAS = 9'd418,
-	parameter logic [7:0] A_COMP = 8'd33, B_COMP = 8'd125, C_COMP = 8'd253)(
+	parameter logic [20:0] A_LOW = 21'd33215, B_LOW = 21'd30660, C_LOW = 21'd38325,
+	parameter logic [8:0] A_BIAS = 9'd273, B_BIAS = 9'd275, C_BIAS = 9'd405,
+	parameter logic [7:0] A_COMP = 8'd169, B_COMP = 8'd169, C_COMP = 8'd33)(
 	input clk_100,
 	input reset,
 	input [9:0] a, b, c, //Angle from 0 to 360 degrees
-	input center, //Active low, used for testing
+	input zero, //Active low, used for testing
 	output logic pwm_a, pwm_b, pwm_c,
 	output logic rev_a, rev_b, rev_c); //High if motor needs to be reversed (180-360 degrees).
 	
@@ -37,14 +38,14 @@ module servo_driver #(
 	countones #(.W1(8),.W2(3)) c2_co (.in(C_COMP & (8'hFF >> (3'd7 - c[2:0]))), .ones(c2));
 	
 	always_comb begin
-		if(center) begin
+		if(zero) begin
 			a_count = 21'(a[8:0] * A_BIAS + a[8:3] * a1 + a2);
-			b_count = 21'(b[8:0] * B_BIAS + b[8:3] * b1+ b2);
+			b_count = 21'(b[8:0] * B_BIAS + b[8:3] * b1 + b2);
 			c_count = 21'(c[8:0] * C_BIAS + c[8:3] * c1 + c2);
 		end else begin
-			a_count = 21'(256*A_BIAS);
-			b_count = 21'(256*B_BIAS);
-			c_count = 21'(256*C_BIAS);
+			a_count = 21'b0;
+			b_count = 21'b0;
+			c_count = 21'b0;
 		end
 	end
 	
@@ -74,6 +75,7 @@ module servo_driver #(
 		end
 	end
 endmodule
+//Red 3C-
 
 /*
 Timing:

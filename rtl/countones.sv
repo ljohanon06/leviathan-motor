@@ -12,7 +12,7 @@ module countones #(
 	parameter W1 = 32,
 	parameter W2 = 5) (
 	input [W1-1:0] in,
-	output [W2-1:0] ones);
+	output logic [W2-1:0] ones);
 	
 	always_comb begin
 		ones = '0;

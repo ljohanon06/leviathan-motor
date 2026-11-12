@@ -1,6 +1,6 @@
 set_location_assignment	PIN_P11	-to {	clk_50	}
 set_location_assignment	PIN_A7	-to {	reset	}
-set_location_assignment	PIN_B8	-to {	center	}
+set_location_assignment	PIN_B8	-to {	zero	}
 set_location_assignment	PIN_C10	-to {	sw[0]	}
 set_location_assignment	PIN_C11	-to {	sw[1]	}
 set_location_assignment	PIN_D12	-to {	sw[2]	}
@@ -20,7 +20,7 @@ set_location_assignment	PIN_A8	-to {	rev_c	}
 
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	clk_50	}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	reset	}
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	center	}
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	zero	}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	sw[*]	}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	pwm_a	}
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to {	pwm_b	}

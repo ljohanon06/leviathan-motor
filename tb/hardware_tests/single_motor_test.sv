@@ -75,7 +75,7 @@ module single_motor_test(
 		.pwm_b(),
 		.pwm_c());
 		
-	single_motor #(.MULT(MULT), .HALF(HALF)) sm1 (
+	single_motor #(.MULT(MULT), .HALF(HALF), MAG_OFFSET(14'h0CF0)) sm1 (
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr),
 		.enable(on_switch),

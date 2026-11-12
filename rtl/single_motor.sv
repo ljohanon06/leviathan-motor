@@ -10,7 +10,8 @@
 
 module single_motor #(
 	parameter MULT = 1,
-	parameter HALF = 0) (
+	parameter HALF = 0,
+	parameter MAG_OFFSET = 14'h0) (
 	input [3:0] clk_arr, //50, 100, 222, 15
 	input [3:0] reset_arr,
 	input enable,
@@ -213,7 +214,7 @@ module single_motor #(
 			
 		
 	//Sensors	
-	adc adc_1 (
+	adc #(.CYCLES(5)) adc_1 (
 		.clk(clk_arr[3]), //50 MHz
 		.reset(reset_arr[3]),
 		.start(meas1_2),
@@ -223,7 +224,7 @@ module single_motor #(
 		.adc(adc1_raw),
 		.done(adc_done_1));
 		
-	adc adc_2 (
+	adc #(.CYCLES(5)) adc_2 (
 		.clk(clk_arr[3]),
 		.reset(reset_arr[3]),
 		.start(meas2_2),
@@ -233,7 +234,7 @@ module single_motor #(
 		.adc(adc2_raw),
 		.done(adc_done_2));
 		
-	magnetic_encoder #(.OFFSET(14'h0CF0)) me (
+	magnetic_encoder #(.OFFSET(MAG_OFFSET)) me (
 		.mag_clk(clk_arr[0]), //15 MHz
 		.reset(reset_arr[0]),
 		.d_in(d_in),

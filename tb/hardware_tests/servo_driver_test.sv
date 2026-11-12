@@ -11,7 +11,7 @@
 module servo_driver_test(
 	input clk_50,
 	input reset,
-	input center,
+	input zero,
 	input [9:0] sw,
 	output rev_a, rev_b, rev_c,
 	output pwm_a, pwm_b, pwm_c);
@@ -30,13 +30,10 @@ module servo_driver_test(
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr));
 	
-	servo_driver #(
-		.A_LOW(21'd0),
-		.A_BIAS(9'd511),
-		.A_COMP(8'd0)) sd (
+	servo_driver sd (
 		.clk_100(clk_arr[2]),
 		.reset(reset_arr[2]),
-		.center(center),
+		.zero(zero),
 		.a(a),
 		.b(b),
 		.c(c),

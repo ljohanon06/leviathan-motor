@@ -19,7 +19,7 @@ module servo_driver_tb();
 	servo_driver sd (
 		.clk_100(clk),
 		.reset(reset),
-		.center(1'b1),
+		.zero(1'b1),
 		.a(a),
 		.b(b),
 		.c(c),
