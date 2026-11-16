@@ -1,7 +1,7 @@
 #Set Pin Assignments
-set_location_assignment	PIN_AA7	-to	{csn	}
-set_location_assignment	PIN_AA6	-to	{d_in	}
-set_location_assignment	PIN_AA5	-to	{mag_clk_out}
+set_location_assignment	PIN_W10	-to {	csn	}
+set_location_assignment	PIN_W8	-to {	d_in	}
+set_location_assignment	PIN_W9	-to {	mag_clk_out	}
 set_location_assignment	PIN_A7	-to	{reset	}
 set_location_assignment	PIN_C14	-to	{ssd1[0]}
 set_location_assignment	PIN_E15	-to	{ssd1[1]}

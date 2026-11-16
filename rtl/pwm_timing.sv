@@ -17,7 +17,7 @@ module pwm_timing #(
 	output logic [31:0] cycle_count,
 	output logic [MULT+10:0] pwm_a, pwm_b, pwm_c);
 	
-	localparam MAX = 90 - 1 + (1024 + (HALF ? 511 : 0)) << MULT; //90 cycles for deadtime
+	localparam MAX = 90 - 1 + ((1024 + (HALF ? 511 : 0)) << MULT); //90 cycles for deadtime
 	localparam B_RE = MAX / 3;
 	localparam C_RE = 2 * MAX / 3;
 	

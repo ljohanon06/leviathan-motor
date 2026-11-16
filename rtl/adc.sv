@@ -59,7 +59,7 @@ module adc #(
 			cs <= 1'b0;
 			adc <= 14'b0;
 			start_reg <= 1'b0;
-			clk_out <= 1'b0;
+			clk_out <= 1'bz;
 		end
 		else begin 
 			start_reg <= start;
@@ -67,14 +67,14 @@ module adc #(
 				state <= converting_phase;
 				cs <= 1'b1;
 				phase_count <= 7'b0;
-				clk_out <= 1'b0;
+				clk_out <= 1'bz;
 				done <= 1'b0;
 			end else if(state == converting_phase) begin //Data Conversion Phase, wait 1400ns
 				if(phase_count == 7'd70) begin
 					state <= d13;
 					cs <= 1'b0;
 					phase_count <= 7'b0;
-					clk_out <= 1'b0;
+					clk_out <= 1'bz;
 				end else begin
 					phase_count <= phase_count + 7'b1;
 				end
@@ -84,18 +84,18 @@ module adc #(
 					clk_out <= 1'b1;
 					adc <= {adc[12:0],sdo};
 				end else if(phase_count % CYCLES == 0 && phase_count != 7'b0)begin
-					clk_out <= 1'b0;
+					clk_out <= 1'bz;
 					state <= adc_state_t'(state + 5'b1);	
 				end			
 			end else if(state == quiet_phase) begin //Quiet Phase
 				done <= 1'b1;
-				clk_out <= 1'b0;
+				clk_out <= 1'bz;
 				if(phase_count == 7'd5)
 					state <= idle;
 				else phase_count <= phase_count + 7'b1;
 			end	else begin
 				cs <= 1'b0;
-				clk_out <= 1'b0;
+				clk_out <= 1'bz;
 			end
 		end
 	end

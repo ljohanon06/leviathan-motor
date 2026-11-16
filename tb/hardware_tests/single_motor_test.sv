@@ -39,8 +39,8 @@ module single_motor_test(
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr));
 	
-	localparam MULT = 0;
-	localparam HALF = 1;
+	localparam MULT = 1;
+	localparam HALF = 0;
 	logic [31:0] cycle_count;	
 	logic [MULT+10:0] pwm_count;
 	logic [17:0] id, iq, vd, vq;
@@ -62,6 +62,13 @@ module single_motor_test(
 		end
 	end
 	
+	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
+		if(~reset_arr[2])
+			vdq_ready <= 1'b0;
+		else
+			vdq_ready <= idq_ready;
+	end
+	
 	
 	logic sensor_done;
 	logic [13:0] mag_reg, adc1_reg, adc2_reg;
@@ -75,7 +82,7 @@ module single_motor_test(
 		.pwm_b(),
 		.pwm_c());
 		
-	single_motor #(.MULT(MULT), .HALF(HALF), MAG_OFFSET(14'h0CF0)) sm1 (
+	single_motor #(.MULT(MULT), .HALF(HALF), .MAG_OFFSET(14'h0CF0)) sm1 (
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr),
 		.enable(on_switch),

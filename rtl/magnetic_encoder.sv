@@ -28,10 +28,14 @@ module magnetic_encoder #(
 		
 	mag_enc_state_t state;
 	logic [23:0] data_shift;
-	logic clk_out_set; //Should clk_out match mag_clk?
+	logic clk_out_set; 
 	logic met_crc;
 	
-	assign clk_out = mag_clk & clk_out_set;
+	always_comb begin
+		if(~clk_out_set || mag_clk)
+			clk_out = 1'bz;
+		else clk_out = 1'b0;
+	end
 	
 	//csn is affected on the positive edge
 	always_ff @(posedge mag_clk or negedge reset) begin

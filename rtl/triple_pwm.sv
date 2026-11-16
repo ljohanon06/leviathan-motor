@@ -71,20 +71,21 @@ module triple_pwm #(
 		.pwm_high(pwm_out[1]),
 		.pwm_low(pwm_out[0]));
 		
-	logic enable_reg;
+	logic valid_reg;
 		
 	always_ff @(posedge clk_222 or negedge reset_222) begin
 		if(~reset_222) begin		//Reset Logic
 			v1_reg <= 18'b0;
 			v2_reg <= 18'b0;
 			v3_reg <= 18'b0;
-			enable_reg <= 1'b0;
-		end
-		else if(enable & ~enable_reg) begin
-			v1_reg <= v1;
-			v2_reg <= v2;
-			v3_reg <= v3;
-			enable_reg <= enable;
+			valid_reg <= 1'b0;
+		end else if(enable) begin
+			valid_reg <= v_valid;
+			if(v_valid & ~valid_reg) begin
+				v1_reg <= v1;
+				v2_reg <= v2;
+				v3_reg <= v3;
+			end
 		end
 	end
 	

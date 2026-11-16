@@ -33,7 +33,7 @@ module pll #(
 		altpll_component.clk0_multiply_by = 200, 
 		altpll_component.clk1_divide_by = 45, 
 		altpll_component.clk1_multiply_by = 200, 
-		altpll_component.clk2_divide_by = 648,
+		altpll_component.clk2_divide_by = 972,
 		altpll_component.clk2_multiply_by = 200, 
 		altpll_component.compensate_clock = A == 1 ? "CLK0" : (B == 1 ? "CLK1" : "CLK2"),
 		altpll_component.inclk0_input_frequency = 20000,

@@ -36,7 +36,7 @@ module single_motor #(
 	
 	//PWM voltage ready
 	logic v_valid;
-	always v_valid = pwm_count > (10+MULT)'('d950) & pwm_count < (10+MULT)'('d1024);
+	always v_valid = pwm_count > (10+MULT)'('d950) & pwm_count < (10+MULT)'('d1023);
 	
 	//Start magnetic encoder at the beginning
 	logic mag_enable, me1, me2;
@@ -53,7 +53,7 @@ module single_motor #(
 	
 	//The current from ADC and foward transform is ready at this time
 	logic idq_f1, idq_ready_222;
-	always idq_ready_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d647);
+	always idq_ready_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d657);
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
 			idq_ready <= 1'b0;
@@ -66,7 +66,7 @@ module single_motor #(
 	
 	//The raw sensor data is ready at this time
 	logic sd_f1, sensor_done_222;
-	always sensor_done_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d647);
+	always sensor_done_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d657);
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
 			sensor_done <= 1'b0;
