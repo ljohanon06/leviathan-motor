@@ -16,11 +16,11 @@ module magnetic_encoder #(
 	input reset,
 	input enable,
 	input d_in,
-	output csn,
-	output clk_out,
-	output done,
-	output [13:0] angle_out,
-	output [23:0] raw_data);
+	output logic csn,
+	output logic clk_out,
+	output logic done,
+	output logic [13:0] angle_out,
+	output logic [23:0] raw_data);
 	
 	typedef enum logic [4:0] {
 		idle, CSN_low, CLK_start, d[13:0],
@@ -28,10 +28,14 @@ module magnetic_encoder #(
 		
 	mag_enc_state_t state;
 	logic [23:0] data_shift;
-	logic clk_out_set; //Should clk_out match mag_clk?
+	logic clk_out_set; 
 	logic met_crc;
 	
-	assign clk_out = mag_clk & clk_out_set;
+	always_comb begin
+		if(~clk_out_set || mag_clk)
+			clk_out = 1'bz;
+		else clk_out = 1'b0;
+	end
 	
 	//csn is affected on the positive edge
 	always_ff @(posedge mag_clk or negedge reset) begin

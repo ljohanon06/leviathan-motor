@@ -18,8 +18,8 @@ module inverse_park(
 	input sin_sign,
 	input [17:0] vd, //Signed .xxxx... 
 	input [17:0] vq,
-	output [17:0] va, //Signed .xxx...
-	output [17:0] vb);
+	output logic [17:0] va, //Signed .xxx...
+	output logic [17:0] vb);
 	
 	logic [34:0] va1_out;
 	logic [34:0] va2_out;

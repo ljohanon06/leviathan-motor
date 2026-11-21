@@ -13,9 +13,9 @@ module inverse_clarke(
 	input reset,
 	input [17:0] va,
 	input [17:0] vb,
-	output [17:0] v1, //Signed x.xx...
-	output [17:0] v2,
-	output [17:0] v3);
+	output logic [17:0] v1, //Signed x.xx...
+	output logic [17:0] v2,
+	output logic [17:0] v3);
 	
 	localparam [17:0] two_root_three_three = 18'h1279a; //Signed x.xx...
 	localparam [17:0] neg_root_three_three = 18'h36c33;

@@ -1,7 +1,7 @@
 #Set Pin Assignments
-set_location_assignment	PIN_AA7	-to	{csn	}
-set_location_assignment	PIN_AA6	-to	{d_in	}
-set_location_assignment	PIN_AA5	-to	{mag_clk_out}
+set_location_assignment	PIN_W10	-to {	csn	}
+set_location_assignment	PIN_W8	-to {	d_in	}
+set_location_assignment	PIN_W9	-to {	mag_clk_out	}
 set_location_assignment	PIN_A7	-to	{reset	}
 set_location_assignment	PIN_C14	-to	{ssd1[0]}
 set_location_assignment	PIN_E15	-to	{ssd1[1]}
@@ -112,8 +112,6 @@ set_instance_assignment	-name	CURRENT_STRENGTH_NEW	8MA	-to	{mg[2]	}
 set_instance_assignment	-name	CURRENT_STRENGTH_NEW	8MA	-to	{mg[3]	}
 set_instance_assignment	-name	CURRENT_STRENGTH_NEW	8MA	-to	{mg[0]	}
 
-set_instance_assignment -name PCI_IO ON -to reset
-set_instance_assignment -name PCI_IO ON -to clk_50
 set_instance_assignment -name PCI_IO ON -to d_in
 
 # This will always be at ground

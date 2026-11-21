@@ -11,7 +11,7 @@
  module reset_sync (
  	input clk,
  	input reset,
- 	output reset_sync);
+ 	output logic reset_sync);
  	
  	logic reset_reg;
  	

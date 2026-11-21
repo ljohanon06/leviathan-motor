@@ -17,33 +17,20 @@ module mag_enc_test (
 	output [3:0] mg,
 	output [6:0] ssd1, ssd2, ssd3, ssd4);
 	
-	logic reset_50, reset_15;
-	reset_sync r50 (
-		.clk(clk_50),
+	logic [3:0] clk_arr, reset_arr; //clk 50, 100, 222, 15	
+	global_clock_reset gcr (
+		.clk_50(clk_50),
 		.reset(reset),
-		.reset_sync(reset_50));
-	
-	//Generate Clock to interact with magnetic encoder
-	logic clk_15;
-	pll #(.A(0), .B(0)) pll_inst (
-		.reset (~reset),
-		.clk_in (clk_50),
-		.c0(),
-		.c1(),
-		.c2 (clk_15));
-	
-	reset_sync r15 (
-		.clk(clk_15),
-		.reset(reset),
-		.reset_sync(reset_15));
+		.clk_arr(clk_arr),
+		.reset_arr(reset_arr));
 	
 	//Handle CDC between clk_15 (magnetic encoder) and clk_50 (logic)
 	logic me_done;
 	logic [13:0] angle_out;
 	logic [13:0] angle_reg, angle_reg2;
 	logic me_reg1, me_reg2;
-	always_ff @(posedge clk_50 or negedge reset_50) begin
-		if(~reset_50) begin
+	always_ff @(posedge clk_50 or negedge reset_arr[3]) begin
+		if(~reset_arr[3]) begin
 			me_reg1 <= 1'b0;
 			me_reg2 <= 1'b0;
 			angle_reg <= 14'b0;
@@ -60,8 +47,8 @@ module mag_enc_test (
 	logic [15:0] clk_count;
 	logic clk_en;
 	
-	always_ff @(posedge clk_50 or negedge reset_50) begin
-		if(~reset_50) begin
+	always_ff @(posedge clk_50 or negedge reset_arr[3]) begin
+		if(~reset_arr[3]) begin
 			clk_count <= 16'b0;
 			clk_en <= 1'b0;
 		end else begin 
@@ -71,8 +58,8 @@ module mag_enc_test (
 		end
 	end
 	
-	always_ff @(posedge clk_50 or negedge reset_50) begin
-		if(~reset_50) 
+	always_ff @(posedge clk_50 or negedge reset_arr[3]) begin
+		if(~reset_arr[3]) 
 			angle_reg2 <= 14'b0;
 		else if(clk_en) 
 			angle_reg2 <= angle_reg;
@@ -84,8 +71,8 @@ module mag_enc_test (
 	
 	//Module Instantiations
 	magnetic_encoder #(.OFFSET(14'h0CF0)) me (
-		.mag_clk(clk_15),
-		.reset(reset_15),
+		.mag_clk(clk_arr[0]),
+		.reset(reset_arr[0]),
 		.d_in(d_in),
 		.enable(1'b1),
 		.csn(csn),

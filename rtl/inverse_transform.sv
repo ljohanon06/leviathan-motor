@@ -17,9 +17,9 @@ module inverse_transform (
 	input cos_sign,
 	input [15:0] sin_mag,
 	input sin_sign,
-	output [17:0] v1, //Signed b16.b15b14...
-	output [17:0] v2, 
-	output [17:0] v3);
+	output logic [17:0] v1, //Signed b16.b15b14...
+	output logic [17:0] v2, 
+	output logic [17:0] v3);
 	
 	//Internal signals
 	logic [17:0] va; //Signed b16.b15b14...
