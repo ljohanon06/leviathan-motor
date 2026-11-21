@@ -86,14 +86,12 @@ module pwm_timing_tb();
 		#99 reset <= 1'b1;
 		#200;
 		
-		for(int i = 0; i<18; i++) begin
-			mag_reg <= 14'(14'h1fff * i * 20 / 360);
-			#10 valid <= 1'b1;
-			#10 valid <= 1'b0;
-			v_valid <= 1'b0;			
-			#500 v_valid <= 1'b1;
-			#20000;
-		end
+		mag_reg <= 14'h07ff;
+		#10 valid <= 1'b1;
+		#10 valid <= 1'b0;
+		v_valid <= 1'b0;			
+		#500 v_valid <= 1'b1;
+		#200000;
 		
 		$stop;		
 	end

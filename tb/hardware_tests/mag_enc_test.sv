@@ -24,13 +24,13 @@ module mag_enc_test (
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr));
 	
-	//Handle CDC between clk_15 (magnetic encoder) and clk_50 (logic)
+	//Handle CDC between clk_15 (magnetic encoder) and clk_100 (logic)
 	logic me_done;
 	logic [13:0] angle_out;
 	logic [13:0] angle_reg, angle_reg2;
 	logic me_reg1, me_reg2;
-	always_ff @(posedge clk_50 or negedge reset_arr[3]) begin
-		if(~reset_arr[3]) begin
+	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
+		if(~reset_arr[2]) begin
 			me_reg1 <= 1'b0;
 			me_reg2 <= 1'b0;
 			angle_reg <= 14'b0;
@@ -47,8 +47,8 @@ module mag_enc_test (
 	logic [15:0] clk_count;
 	logic clk_en;
 	
-	always_ff @(posedge clk_50 or negedge reset_arr[3]) begin
-		if(~reset_arr[3]) begin
+	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
+		if(~reset_arr[2]) begin
 			clk_count <= 16'b0;
 			clk_en <= 1'b0;
 		end else begin 
@@ -58,8 +58,8 @@ module mag_enc_test (
 		end
 	end
 	
-	always_ff @(posedge clk_50 or negedge reset_arr[3]) begin
-		if(~reset_arr[3]) 
+	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
+		if(~reset_arr[2]) 
 			angle_reg2 <= 14'b0;
 		else if(clk_en) 
 			angle_reg2 <= angle_reg;
@@ -67,7 +67,7 @@ module mag_enc_test (
 	
 	//Unchecked data from magnetic encoder
 	logic [23:0] raw_data;
-	assign mg = raw_data[9:6];
+	assign mg = {raw_data[23:10] == angle_out, raw_data[9:7]};
 	
 	//Module Instantiations
 	magnetic_encoder #(.OFFSET(14'h0CF0)) me (
@@ -81,20 +81,54 @@ module mag_enc_test (
 		.angle_out(angle_out),
 		.raw_data(raw_data));
 		
+	logic [15:0] cos_mag, sin_mag;
+	logic cos_sign, sin_sign, cordic_done;
+		
+	cordic_full cd (
+		.clk(clk_arr[2]),
+		.reset(reset_arr[2]),
+		.valid(me_reg2), 
+		.ready(), //Shows cordic module is ready, unused
+		.angle_in(angle_reg), 
+		.cos_mag(cos_mag),
+		.sin_mag(sin_mag),
+		.cos_sign(cos_sign),
+		.sin_sign(sin_sign),
+		.done(cordic_done));
+		
+	logic [17:0] v1, v2, v3;
+		
+	inverse_transform it (
+		.clk(clk_arr[2]),
+		.reset(reset_arr[2]),
+		.vd(18'b0),
+		.vq(18'h1BB60),
+		.cos_mag(cos_mag),
+		.sin_mag(sin_mag),
+		.cos_sign(cos_sign),
+		.sin_sign(sin_sign),
+		.v1(v1),
+		.v2(v2),
+		.v3(v3));
+		
+	logic [3:0] [3:0] hex;
+	//assign hex = v2[15:0];
+	assign hex = {raw_data[23:10] == angle_out,1'b0,angle_out};
+		
 	single_ssd s1 (
-		.in(angle_reg2[3:0]),
+		.in(hex[0]),
 		.ssd(ssd1));
 	
 	single_ssd s2 (
-		.in(angle_reg2[7:4]),
+		.in(hex[1]),
 		.ssd(ssd2));
 	
 	single_ssd s3 (
-		.in(angle_reg2[11:8]),
+		.in(hex[2]),
 		.ssd(ssd3));
 		
 	single_ssd s4 (
-		.in({2'b0,angle_reg2[13:12]}),
+		.in(hex[3]),
 		.ssd(ssd4));
 		
 endmodule

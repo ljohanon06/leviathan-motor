@@ -39,7 +39,7 @@ module full_system_test(
 	localparam MULT = 1;
 	localparam HALF = 0;
 	
-	assign debug = mag_reg[12:3];
+	assign debug = mag_reg_a[12:3];
 	
 	logic [3:0] clk_arr, reset_arr; //clk 50, 100, 222, 15	
 	
@@ -187,7 +187,7 @@ module full_system_test(
 		.rev_b(reverse_motor[1]),
 		.rev_c(reverse_motor[0]));
 	
-	//TODO: PID Controls
+	//TODO: PI Controls
 	
 	//TODO: Process UART data and deal with transmission to ESP32
 	typedef struct packed {

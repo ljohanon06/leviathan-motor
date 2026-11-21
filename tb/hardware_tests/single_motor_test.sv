@@ -29,7 +29,6 @@ module single_motor_test(
 	output wr,
 	output [9:0] debug,
 	output [6:0] ssd1, ssd2, ssd3, ssd4);
-	assign debug = mag_reg[12:3];
 	
 	logic [3:0] clk_arr, reset_arr; //clk 50, 100, 222, 15	
 	
@@ -46,7 +45,7 @@ module single_motor_test(
 	logic [17:0] id, iq, vd, vq;
 	logic vdq_ready, idq_ready;
 	
-	assign vd = 18'b0;
+	assign vd = 18'h0;
 	
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
@@ -82,7 +81,8 @@ module single_motor_test(
 		.pwm_b(),
 		.pwm_c());
 		
-	single_motor #(.MULT(MULT), .HALF(HALF), .MAG_OFFSET(14'h0CF0)) sm1 (
+	logic [23:0] raw_mag;
+	single_motor #(.MULT(MULT), .HALF(HALF), .MAG_OFFSET(14'h0CF0)) sm1 ( //14'h0CF0
 		.clk_arr(clk_arr),
 		.reset_arr(reset_arr),
 		.enable(on_switch),
@@ -104,20 +104,20 @@ module single_motor_test(
 		.mag_clk_out(mag_clk_out),
 		.csn(csn),
 		.mag_reg(mag_reg),
+		.raw_mag(raw_mag),
 		.adc1_reg(adc1_reg),
 		.adc2_reg(adc2_reg),
 		.sensor_done(sensor_done));
 		
-	monitor #(.N(7)) mon (
+	monitor #(.N(10)) mon (
 		.clk(clk_arr[2]),
 		.reset(reset_arr[2]),
-		.data_input({cycle_count,2'b0,mag_reg,5'b0,voltage}),
+		.data_input({cycle_count,2'b0,mag_reg,8'b0,raw_mag}),
 		.data_write(sensor_done && (cycle_count[2:0] == 3'b0)), //Write every 8 cycles
 		.ft232_clk(ft232_clk),
 		.txe(txe),
 		.ft232_data(ft232_data),
 		.wr(wr));
-		
 		
 	logic [15:0] speed_hz;
 	speedometer speed (
@@ -141,4 +141,6 @@ module single_motor_test(
 	single_ssd s4 (
 		.in(speed_hz[15:12]),
 		.ssd(ssd4));
+		
+	assign debug = mag_reg[12:3];
 endmodule
