@@ -92,7 +92,9 @@ module magnetic_encoder #(
 	always_comb begin
 		//Next state and for clk_level 0
 		if(~clk_level) begin
-			if(state == idle && enable)
+			if(~reset)
+				next_state = idle;
+			else if(state == idle && enable)
 				next_state = csn_low;
 			else if (state == csn_low)
 				next_state = csn_low;
@@ -103,7 +105,9 @@ module magnetic_encoder #(
 			else //state == delay
 				next_state <= delay;
 		end else begin //Next state for clk_level 1
-			if(state == idle && enable)//Shouldn't Occur
+			if(~reset)
+				next_state = idle;
+			else if(state == idle && enable)//Shouldn't Occur
 				next_state = csn_low;
 			else if (state == csn_low)
 				next_state = d13;

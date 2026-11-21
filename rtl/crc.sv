@@ -17,7 +17,7 @@ module crc #(
 	output met_crc,
 	output [CRC_WIDTH-2:0] crc_num);
 	
-	localparam X = BIT_WIDTH+CRC_WIDTH-2; //19
+	localparam X = BIT_WIDTH+CRC_WIDTH-2;
 	
 	logic [X:0] out;
 	assign met_crc = out[CRC_WIDTH-2:0] == '0;
