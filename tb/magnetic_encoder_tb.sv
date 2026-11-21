@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module magnetic_encoder_tb();
 
 	logic clk, reset;
@@ -7,7 +9,7 @@ module magnetic_encoder_tb();
 	logic [13:0] angle_out;
 	logic [23:0] raw_data;
 	
-	magnetic_encoder #(.OFFSET(14'h0CF0)) me (
+	magnetic_encoder #(.OFFSET(14'h0)) me (
 		.mag_clk(clk),
 		.reset(reset),
 		.d_in(d_in),
@@ -18,17 +20,29 @@ module magnetic_encoder_tb();
 		.angle_out(angle_out),
 		.raw_data(raw_data));
 		
-	always #50 clk = ~clk;
+	logic load;
+	logic [17:0] load_input;
+		
+	magnetic_encoder_sim sim(
+		.clk(mag_clk_out),
+		.reset(reset),
+		.cs(csn),
+		.load(load),
+		.load_input(load_input),
+		.miso(d_in));
+		
+	always #28.8 clk = ~clk;
 	
 	initial begin
 		clk = 1'b0;
 		reset = 1'b1;
-		d_in = 1'b1;
+		load <= 1'b1;
+		load_input <= 18'h2F395;
 		
-		#100 reset <= 1'b0;
-		#100 reset <= 1'b1;
+		#1 reset <= 1'b0;
+		#200 reset <= 1'b1;
 		
-		#10000;
+		#20000;
 		$stop;
 	end
 

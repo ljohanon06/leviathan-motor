@@ -22,10 +22,12 @@ module magnetic_encoder_sim(
 			post_cs <= 1'b0;
 			shift <= 24'b0;
 			count <= 5'b0;
+			miso <= 1'b1;
 		end else if(~post_cs && count == 5'b0) begin
 			if(load)
 				data <= load_input;
 			post_cs <= 1'b1;
+			miso <= 1'b1;
 		end else begin
 			if(post_cs) begin
 				post_cs <= 1'b0;
