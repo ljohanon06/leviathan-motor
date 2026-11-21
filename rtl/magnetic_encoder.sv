@@ -12,7 +12,7 @@
 //This value plus 14'h0800 is the offset
 module magnetic_encoder #(
 	parameter logic [13:0] OFFSET = 14'b0) (
-	input mag_clk,
+	input mag_clk, 
 	input reset,
 	input enable,
 	input d_in,
@@ -23,80 +23,110 @@ module magnetic_encoder #(
 	output logic [23:0] raw_data);
 	
 	typedef enum logic [4:0] {
-		idle, CSN_low, CLK_start, d[13:0],
-		m[3:0], crc[5:0], CRC_check[1:0], CSN_high} mag_enc_state_t;
+		idle, csn_low, d[13:0], m[3:0], crc[5:0], csn_high, delay} mag_enc_state_t;
 		
 	mag_enc_state_t state;
-	logic [23:0] data_shift;
-	logic clk_out_set; 
+	logic clk_level; //State variable, what level is the clk_out at
+	
+	logic [23:0] shift_reg;
 	logic met_crc;
 	
-	always_comb begin
-		if(~clk_out_set || mag_clk)
-			clk_out = 1'bz;
-		else clk_out = 1'b0;
-	end
+	mag_enc_state_t next_state;
+	logic next_clk_level;
 	
-	//csn is affected on the positive edge
 	always_ff @(posedge mag_clk or negedge reset) begin
 		if(~reset) begin
+			shift_reg <= 24'b0;
 			csn <= 1'b1;
-		end
-		else begin
-			if(state != idle && state != CSN_high)
-				csn <= 1'b0;
-			else csn <= 1'b1;
-		end
-	end
-	
-	//d_in read on neg, clk_out_set, state, done
-	always_ff @(negedge mag_clk or negedge reset) begin
-		if(~reset) begin
-			data_shift <= 24'b0;
-			clk_out_set <= 1'b0;
+			clk_out <= 1'b1;
 			state <= idle;
+			clk_level <= 1'b0;
 			done <= 1'b0;
-			raw_data <= '0;
-			angle_out <= '0;
-		end
-		else begin
-			if(state == idle && enable) begin
-				state <= CSN_low;
-			end else if(state == CSN_low) begin //csn handled by posedge
-				state <= CLK_start; 
-			end else if(state == CLK_start) begin
-				state <= d13;
-				clk_out_set <= 1'b1;
-				done <= 1'b0;
-			end else if(state >= 5'd3 && state <= 5'd25) begin //between d13 and crc1
-				state <= mag_enc_state_t'(state + 5'b1);
-				data_shift <= {data_shift[22:0],d_in};
-			end else if(state == crc0) begin
-				state <= CRC_check1;
-				data_shift <= {data_shift[22:0],d_in};
-				clk_out_set <= 1'b0;
-			end else if(state == CRC_check1) begin //Give a clock cycle for CRC to compute
-				state <= CRC_check0;
-			end else if(state == CRC_check0) begin
-				state <= CSN_high;
-			end else if(state == CSN_high) begin
-				state <= idle;
-				raw_data <= data_shift;
-				if(met_crc) begin //Only set done if checksum matches
+			angle_out <= 14'b0;
+			raw_data <= 24'b0;
+		end else begin
+			state <= next_state;
+			clk_level <= next_clk_level;
+			
+			if(state >= d13 && state <= crc0 && clk_level)
+				shift_reg <= {shift_reg[22:0], d_in};
+				
+			//Done and load shift register
+			if(state == csn_high && clk_level) begin
+				raw_data <= shift_reg;
+				if(met_crc) begin
+					angle_out <= shift_reg[23:10] - OFFSET;
 					done <= 1'b1;
-					angle_out <= data_shift[23:10] - OFFSET;
 				end
-				else done <= 1'b0; 
 			end
+			if(state == crc0)
+				done <= 1'b0;	
+			
+			//CSN
+			if(next_state == idle || next_state == delay)
+				csn <= 1'b1;
+			else csn <= 1'b0;
+				
+			//Clock out
+			if(next_state == idle)
+				clk_out <= 1'b1;
+			else if(next_state == csn_low)
+				clk_out <= 1'b1;
+			else if(next_state == csn_high)
+				clk_out <= 1'b1;
+			else if(next_state == delay)
+				clk_out <= 1'b1;
+			else if(next_clk_level == 1'b0)
+				clk_out <= 1'b0;
+			else clk_out <= 1'b1;
 		end
 	end
 	
 	crc #(.BIT_WIDTH(18)) checksum (
-		.in(data_shift),
+		.in(shift_reg),
 		.met_crc(met_crc),
 		.crc_num());
 	
+	//Next state combinational logic
+	//Next_state logic
+	always_comb begin
+		//Next state and for clk_level 0
+		if(~clk_level) begin
+			if(state == idle && enable)
+				next_state = csn_low;
+			else if (state == csn_low)
+				next_state = csn_low;
+			else if (state >= d13 && state <= crc0)
+				next_state = state;
+			else if (state == csn_high)
+				next_state = csn_high;
+			else //state == delay
+				next_state <= delay;
+		end else begin //Next state for clk_level 1
+			if(state == idle && enable)//Shouldn't Occur
+				next_state = csn_low;
+			else if (state == csn_low)
+				next_state = d13;
+			else if (state >= d13 && state <= crc0)
+				next_state = mag_enc_state_t'(state + 5'b1);
+			else if (state == csn_high)
+				next_state = delay;
+			else //state == delay
+				next_state = idle;
+		end
+	end
+	
+	//Next clock level logic
+	always_comb begin
+		if(state == idle) 
+			next_clk_level = 1'b0;
+		else next_clk_level = ~clk_level;
+	end
+	
+	
 endmodule
+
+
 
 /*
 Timing Details:

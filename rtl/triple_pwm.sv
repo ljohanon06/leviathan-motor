@@ -35,6 +35,31 @@ module triple_pwm #(
 	logic [10+MULT:0] pwm_high_v3;
 	logic [10+MULT:0] pwm_low_v3;
 	
+	logic [10+MULT:0] pwm_high_v1_r;
+	logic [10+MULT:0] pwm_low_v1_r;
+	logic [10+MULT:0] pwm_high_v2_r;
+	logic [10+MULT:0] pwm_low_v2_r;
+	logic [10+MULT:0] pwm_high_v3_r;
+	logic [10+MULT:0] pwm_low_v3_r;
+	
+	always_ff @(posedge clk_222 or negedge reset_222) begin
+		if(~reset_222) begin
+			pwm_high_v1_r <= '0;
+			pwm_low_v1_r <= '0;
+			pwm_high_v2_r <= '0;
+			pwm_low_v2_r <= '0;
+			pwm_high_v3_r <= '0;
+			pwm_low_v3_r <= '0;
+		end else if(pwm_count == '0) begin
+			pwm_high_v1_r <= pwm_high_v1;
+			pwm_low_v1_r <= pwm_low_v1;
+			pwm_high_v2_r <= pwm_high_v2;
+			pwm_low_v2_r <= pwm_low_v2;
+			pwm_high_v3_r <= pwm_high_v3;
+			pwm_low_v3_r <= pwm_low_v3;
+		end
+	end
+	
 	voltage_normalizer #(.MULT(MULT), .HALF(HALF)) nv1 (
 		.v_in(v1_reg),
 		.pwm_high(pwm_high_v1),
@@ -52,22 +77,22 @@ module triple_pwm #(
 		
 	single_pwm #(.MULT(MULT), .HALF(HALF)) sp1 (
 		.pwm_count(pwm_count),
-		.pwm_high_count(pwm_high_v1),
-		.pwm_low_count(pwm_low_v1),
+		.pwm_high_count(pwm_high_v1_r),
+		.pwm_low_count(pwm_low_v1_r),
 		.pwm_high(pwm_out[5]),
 		.pwm_low(pwm_out[4]));
 	
 	single_pwm #(.MULT(MULT), .HALF(HALF)) sp2 (
 		.pwm_count(pwm_count),
-		.pwm_high_count(pwm_high_v2),
-		.pwm_low_count(pwm_low_v2),
+		.pwm_high_count(pwm_high_v2_r),
+		.pwm_low_count(pwm_low_v2_r),
 		.pwm_high(pwm_out[3]),
 		.pwm_low(pwm_out[2]));
 	
 	single_pwm #(.MULT(MULT), .HALF(HALF)) sp3 (
 		.pwm_count(pwm_count),
-		.pwm_high_count(pwm_high_v3),
-		.pwm_low_count(pwm_low_v3),
+		.pwm_high_count(pwm_high_v3_r),
+		.pwm_low_count(pwm_low_v3_r),
 		.pwm_high(pwm_out[1]),
 		.pwm_low(pwm_out[0]));
 		

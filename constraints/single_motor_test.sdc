@@ -12,10 +12,7 @@ set_clock_groups -asynchronous \
 	-group [get_clocks {gcr|pll_inst|altpll_component|auto_generated|pll1|clk[1]}] \
 	-group [get_clocks {gcr|pll_inst|altpll_component|auto_generated|pll1|clk[2]}] 
 
-# Magnetic Encoder Requirements, Data read 15ns after rising edge
-create_generated_clock -name mag_enc_clk -source [get_pins {gcr|pll_inst|altpll_component|auto_generated|pll1|clk[2]}] [get_ports mag_clk_out]
-set_input_delay -clock mag_enc_clk -max 15.5 [get_ports d_in]
-set_input_delay -clock mag_enc_clk -min 0.5 [get_ports d_in]
+
 
 # FT232H Requirements, Setup time of 7.5ns for wr, data, Setup time of 9ns for txe
 set_output_delay -clock ft232_clk -max 7.5 [get_ports {wr ft232_data[*]}]

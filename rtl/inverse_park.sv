@@ -87,7 +87,7 @@ module inverse_park(
 		.lpm_widthp(35),
 		.lpm_pipeline(1),
 		.lpm_representation("SIGNED"),
-		.lpm_hint("DEDICATED_MULTIPLIER_CIRCUITRY=YES")) dvb2 (
+		.lpm_hint("DEDICATED_MULTIPLIER_CIRCUITRY=YES")) vb2 (
 		.dataa(vq),
 		.datab({1'b0,cos_mag}),
 		.result(vb2_out),

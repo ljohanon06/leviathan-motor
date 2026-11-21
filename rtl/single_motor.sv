@@ -31,16 +31,19 @@ module single_motor #(
 	output logic mag_clk_out,
 	output logic csn,
 	output logic [13:0] mag_reg, //Output signals for monitor
+	output logic [23:0] raw_mag,
 	output logic [13:0] adc1_reg, adc2_reg,
 	output logic sensor_done); 
 	
+	localparam MAX = 90 - 1 + ((1024 + (HALF ? 511 : 0)) << MULT);
+	
 	//PWM voltage ready
 	logic v_valid;
-	always v_valid = pwm_count > (10+MULT)'('d950) & pwm_count < (10+MULT)'('d1023);
+	assign v_valid = pwm_count > (11+MULT)'(MAX-16) & pwm_count < (11+MULT)'(MAX);
 	
 	//Start magnetic encoder at the beginning
 	logic mag_enable, me1, me2;
-	always me1 = pwm_count < 10'd64;
+	assign me1 = pwm_count > 10'd64 && pwm_count < 10'd192 && enable;
 	always_ff @(posedge clk_arr[0] or negedge reset_arr[0]) begin
 		if(~reset_arr[0]) begin
 			me2 <= 1'b0;
@@ -53,7 +56,7 @@ module single_motor #(
 	
 	//The current from ADC and foward transform is ready at this time
 	logic idq_f1, idq_ready_222;
-	always idq_ready_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d657);
+	assign idq_ready_222 = pwm_count >= (10+MULT)'('d900) && pwm_count <= (10+MULT)'('d920);
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
 			idq_ready <= 1'b0;
@@ -66,7 +69,7 @@ module single_motor #(
 	
 	//The raw sensor data is ready at this time
 	logic sd_f1, sensor_done_222;
-	always sensor_done_222 = pwm_count >= (10+MULT)'('d640) && pwm_count <= (10+MULT)'('d657);
+	assign sensor_done_222 = pwm_count >= (10+MULT)'('d900) && pwm_count <= (10+MULT)'('d920);
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin
 		if(~reset_arr[2]) begin
 			sensor_done <= 1'b0;
@@ -156,6 +159,7 @@ module single_motor #(
 		.id(id), //External outputs to PI
 		.iq(iq));
 		
+		
 	//Sensor Clock Domain Crossing using 2-flip flop handshake on done signal
 	always_ff @(posedge clk_arr[2] or negedge reset_arr[2]) begin //100MHz
 		if(~reset_arr[2]) begin
@@ -165,7 +169,7 @@ module single_motor #(
 		end else begin
 			a1d_1 <= adc_done_1;
 			a1d_2 <= a1d_1;
-			if(a1d_2 & ~a1d_1)
+			if(~a1d_2 & a1d_1)
 				adc1_reg <= adc1_raw;
 		end
 	end
@@ -178,7 +182,7 @@ module single_motor #(
 		end else begin
 			a2d_1 <= adc_done_2;
 			a2d_2 <= a2d_1;
-			if(a2d_2 & ~a2d_1)
+			if(~a2d_2 & a2d_1)
 				adc2_reg <= adc2_raw;
 		end
 	end
@@ -191,7 +195,7 @@ module single_motor #(
 		end else begin
 			med_1 <= me_done;
 			med_2 <= med_1;
-			if(med_2 & ~med_1)
+			if(~med_2 & med_1)
 				mag_reg <= mag_raw;
 		end
 	end
@@ -214,7 +218,7 @@ module single_motor #(
 			
 		
 	//Sensors	
-	adc #(.CYCLES(5)) adc_1 (
+	adc #(.CYCLES(4)) adc_1 (
 		.clk(clk_arr[3]), //50 MHz
 		.reset(reset_arr[3]),
 		.start(meas1_2),
@@ -224,7 +228,7 @@ module single_motor #(
 		.adc(adc1_raw),
 		.done(adc_done_1));
 		
-	adc #(.CYCLES(5)) adc_2 (
+	adc #(.CYCLES(4)) adc_2 (
 		.clk(clk_arr[3]),
 		.reset(reset_arr[3]),
 		.start(meas2_2),
@@ -242,7 +246,7 @@ module single_motor #(
 		.csn(csn),
 		.clk_out(mag_clk_out),
 		.done(me_done),
-		.raw_data(), //Unused
+		.raw_data(raw_mag),
 		.angle_out(mag_raw));
 	
 	
