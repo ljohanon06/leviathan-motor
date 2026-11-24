@@ -107,7 +107,8 @@ module single_motor_test(
 		.raw_mag(raw_mag),
 		.adc1_reg(adc1_reg),
 		.adc2_reg(adc2_reg),
-		.sensor_done(sensor_done));
+		.sensor_done(sensor_done),
+		.debug(debug));
 		
 	monitor #(.N(10)) mon (
 		.clk(clk_arr[2]),
@@ -141,6 +142,4 @@ module single_motor_test(
 	single_ssd s4 (
 		.in(speed_hz[15:12]),
 		.ssd(ssd4));
-		
-	assign debug = mag_reg[12:3];
 endmodule

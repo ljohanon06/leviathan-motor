@@ -1,3 +1,13 @@
+/*
+ * File        : full_system_test.sv
+ * Author      : Levi Johanon
+ * Description : Wraps the uart transmitter and receiver, handles multiple byte transmission
+ *
+ * Copyright (c) 2026 Levi Johanon
+ * This code is licensed under the MIT License.
+ * See the LICENSE file in the project root for full license information.
+ */
+
 module uart_wrapper #(
 	parameter TX_SIZE = 4,
 	parameter RX_SIZE = 4) (
@@ -77,6 +87,9 @@ module uart_wrapper #(
 		end
 	end
 	
+	logic in_reset;
+	logic [15:0] reset_count;
+	
 	always_ff @(posedge clk_50 or negedge reset) begin
 		if(~reset) begin
 			rx_state <= idle_rx;
@@ -84,29 +97,41 @@ module uart_wrapper #(
 			rx_valid <= 1'b0;
 			rx_data_valid_reg <= 1'b0;
 			rx_packet <= '0;
+			in_reset <= 1'b1;
+			reset_count <= 16'b0;
 		end else begin
-			rx_data_valid_reg <= rx_data_valid;
-			if(rx_data_valid && ~rx_data_valid_reg) begin
-				rx_valid <= 1'b0;
-				if(rx_state == idle_rx) begin
-					rx_state <= receiving;
-					rx_reg <= {rx_data,((RX_SIZE+1)*8)'('b0)};
-				end else
-					rx_reg <= {rx_data, rx_reg[RX_SIZE+1:1]};
-					
-				if(rx_failed_parity)
-					rx_state <= parity;
-			end
-			if(rx_reg[0] != 8'b0 && rx_state != idle_rx) begin
-				if(rx_state == receiving) begin
-					rx_valid <= 1'b1;
-					rx_packet <= rx_reg[RX_SIZE:1];
-					rx_state <= idle_rx;
-				end else begin //parity
-					rx_state <= idle_rx;
+			if(in_reset) begin
+				if(~rx) //After reset, it needs 1.3ms with rx high to release from reset
+					reset_count <= 16'b0;
+				else reset_count <= reset_count + 16'b1;
+				if(reset_count == 16'hFFFF)
+					in_reset <= 1'b0;
+			end else begin
+				rx_data_valid_reg <= rx_data_valid;
+				if(rx_data_valid && ~rx_data_valid_reg) begin
 					rx_valid <= 1'b0;
+					if(rx_state == idle_rx) begin
+						rx_state <= receiving;
+						rx_reg <= {rx_data,((RX_SIZE+1)*8)'('b0)};
+					end else
+						rx_reg <= {rx_data, rx_reg[RX_SIZE+1:1]};
+						
+					if(rx_failed_parity)
+						rx_state <= parity;
 				end
-			end	
+				if(rx_reg[0] != 8'b0 && rx_state != idle_rx) begin
+					if(rx_state == receiving && rx_reg[0] == 8'h55 && rx_reg[RX_SIZE+1] == 8'h55) begin
+						rx_valid <= 1'b1;
+						rx_packet <= rx_reg[RX_SIZE:1];
+						rx_state <= idle_rx;
+					end else begin //parity
+						rx_state <= idle_rx;
+						rx_valid <= 1'b0;
+						in_reset <= 1'b1;
+						reset_count <= 16'b0;
+					end
+				end
+			end
 		end
 	end
 	

@@ -187,7 +187,7 @@ module full_system_test(
 		.rev_b(reverse_motor[1]),
 		.rev_c(reverse_motor[0]));
 	
-	//TODO: PI Controls
+	//TODO: PI// Controls
 	
 	//TODO: Process UART data and deal with transmission to ESP32
 	typedef struct packed {
@@ -216,8 +216,8 @@ module full_system_test(
 	uart_wrapper #(
 		.TX_SIZE(2),
 		.RX_SIZE(8)) uw (
-		.clk_50(clk),
-		.reset(reset),
+		.clk_50(clk_arr[3]),
+		.reset(reset_arr[3]),
 		.tx_packet(tx_packet),
 		.rx_packet(rx_packet),
 		.tx_valid(tx_valid),

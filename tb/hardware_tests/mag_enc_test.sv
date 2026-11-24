@@ -113,7 +113,7 @@ module mag_enc_test (
 		
 	logic [3:0] [3:0] hex;
 	//assign hex = v2[15:0];
-	assign hex = {raw_data[23:10] == angle_out,1'b0,angle_out};
+	assign hex = {2'b0,angle_out};
 		
 	single_ssd s1 (
 		.in(hex[0]),

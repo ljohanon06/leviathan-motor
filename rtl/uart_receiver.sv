@@ -85,7 +85,7 @@ module uart_receiver (
 			if(count_16 == 4'd15) begin
 				case(cur_state)
 					start: cur_state <= d0;
-					d0,d1,d2,d3,d4,d5,d6,d7: 
+					d0,d1,d2,d3,d4,d5,d6: 
 						cur_state <= state_t'(cur_state + 4'b1);
 					d7: cur_state <= parity;
 					parity: cur_state <= stop;

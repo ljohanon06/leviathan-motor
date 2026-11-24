@@ -33,7 +33,8 @@ module single_motor #(
 	output logic [13:0] mag_reg, //Output signals for monitor
 	output logic [23:0] raw_mag,
 	output logic [13:0] adc1_reg, adc2_reg,
-	output logic sensor_done); 
+	output logic sensor_done,
+	output logic [9:0] debug); 
 	
 	localparam MAX = 90 - 1 + ((1024 + (HALF ? 511 : 0)) << MULT);
 	
@@ -249,7 +250,7 @@ module single_motor #(
 		.raw_data(raw_mag),
 		.angle_out(mag_raw));
 	
-	
+	assign debug = {mag_raw == (raw_mag[23:10]-14'h0CF0),9'b0};
 endmodule
 	
 	

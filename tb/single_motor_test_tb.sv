@@ -58,7 +58,7 @@ module single_motor_test_tb();
 	always_ff @(posedge clk or negedge reset) begin
 		if(~reset) begin
 			past_idq <= 1'b0;
-			load_input <= {14'h3A6F, 4'b0};
+			load_input <= 18'h1a2f0;
 		end else begin
 			past_idq <= debug[0];
 			if(debug[0] & ~past_idq)
